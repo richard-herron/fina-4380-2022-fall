@@ -1,0 +1,25 @@
+title: FINA 4380 
+subtitle: Fall 2022
+author: Richard Herron
+logo: DMSB_100th_LogoMark_CMYK_Horiz.jpg
+only_build_toc_files: true
+
+execute:
+  execute_notebooks: false
+
+html:
+  use_repository_button: true
+  use_issues_button: true
+
+bibtex_bibfiles: 
+  - references.bib
+
+launch_buttons:
+  colab_url: "https://colab.research.google.com"
+  notebook_interface: "jupyterlab"
+
+repository:
+  url: https://github.com/richard-herron/fina-4380-2022-fall
+  path_to_book: Notebooks
+  branch: main
+

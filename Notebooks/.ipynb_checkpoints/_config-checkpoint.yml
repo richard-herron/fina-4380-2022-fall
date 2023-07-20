@@ -1,0 +1,9 @@
+title: FINA 4380 for Fall 2022
+author: Richard Herron
+
+latex:
+  latex_documents:
+    targetname: book.tex
+#
+# bibtex_bibfiles: 
+#   - library.bib

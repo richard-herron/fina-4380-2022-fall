@@ -1,0 +1,1587 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Lewinson Chapter 2 - Technical Analysis in Python &#8212; FINA 4380</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Lewinson/lewinson-02';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lewinson Chapter 4 - Multi-Factor Models" href="lewinson-04.html" />
+    <link rel="prev" title="Lewinson Chapter 1 - Financial Data and Preprocessing" href="lewinson-01.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../introduction.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/DMSB_100th_LogoMark_CMYK_Horiz.jpg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/DMSB_100th_LogoMark_CMYK_Horiz.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">McKinney</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../McKinney/mckinney-02.html">McKinney Chapter 2 - Python Language Basics, IPython, and Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../McKinney/mckinney-03.html">McKinney Chapter 3 - Built-in Data Structures, Functions, and Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../McKinney/mckinney-04.html">McKinney Chapter 4 - NumPy Basics: Arrays and Vectorized Computation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../McKinney/mckinney-05.html">McKinney Chapter 5 - Getting Started with pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../McKinney/mckinney-08.html">McKinney Chapter 8 - Data Wrangling: Join, Combine, and Reshape</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../McKinney/mckinney-10.html">McKinney Chapter 10 - Data Aggregation and Group Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../McKinney/mckinney-11.html">McKinney Chapter 11 - Time Series</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Lewinson</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="lewinson-01.html">Lewinson Chapter 1 - Financial Data and Preprocessing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lewinson Chapter 2 - Technical Analysis in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lewinson-04.html">Lewinson Chapter 4 - Multi-Factor Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lewinson-06.html">Lewinson Chapter 6: Monte Carlo Simulations in Finance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lewinson-07.html">Lewinson Chapter 7 - Asset Allocation in Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Herron</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Herron/herron-lookups.html">Herron - Lookups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Herron/herron-downloading-data.html">Herron - Downloading Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Herron/herron-do-market-prices-respond.html">Herron - Do market prices respond to new information?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Herron/herron-momentum.html">Herron - Does momentum investing work?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Herron/herron-does-the-capm-work.html">Herron - Does the capital asset pricing model (CAPM) work?</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/richard-herron/fina-4380-2022-fall/blob/main/Notebooks/Lewinson/lewinson-02.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/richard-herron/fina-4380-2022-fall" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/richard-herron/fina-4380-2022-fall/issues/new?title=Issue%20on%20page%20%2FLewinson/lewinson-02.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Lewinson/lewinson-02.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lewinson Chapter 2 - Technical Analysis in Python</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backtesting-a-strategy-based-on-simple-moving-average">Backtesting a Strategy Based on Simple Moving Average</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-bollinger-bands-and-testing-a-buy-sell-strategy">Calculating Bollinger Bands and testing a buy/sell strategy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-the-relative-strength-index-and-testing-a-long-short-strategy">Calculating the relative strength index and testing a long/short strategy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice">Practice</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lewinson-chapter-2-technical-analysis-in-python">
+<h1>Lewinson Chapter 2 - Technical Analysis in Python<a class="headerlink" href="#lewinson-chapter-2-technical-analysis-in-python" title="Permalink to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>Chapter 2 of Eryk Lewinson’s <a class="reference external" href="https://www.packtpub.com/product/python-for-finance-cookbook/9781789618518"><em>Python for Finance Cookbook</em></a> discusses a handful of trading strategies based on technical analysis.</p>
+<p>We will focus on implementing and evaluating a trading strategy based on past prices and returns.</p>
+<p><em><strong>Note:</strong></em> Indented block quotes are from Lewinson, and section numbers differ from Lewinson because we will not discuss every topic.</p>
+<p>I will simplify and streamline his code, where possible.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
+<span class="o">%</span><span class="k">precision</span> 4
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests_cache</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">requests_cache</span><span class="o">.</span><span class="n">CachedSession</span><span class="p">(</span><span class="n">expire_after</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
+<span class="kn">import</span> <span class="nn">pandas_datareader</span> <span class="k">as</span> <span class="nn">pdr</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="backtesting-a-strategy-based-on-simple-moving-average">
+<h2>Backtesting a Strategy Based on Simple Moving Average<a class="headerlink" href="#backtesting-a-strategy-based-on-simple-moving-average" title="Permalink to this heading">#</a></h2>
+<p>Lewinson uses the backtrader package to implement his technical trading strategies.
+However, there are no recent code commits to <a class="reference external" href="https://github.com/mementum/backtrader">backtrader’s GitHub repository</a>, so it may be abandoned.
+So we manually implement these stategies and learn a lot in the process!</p>
+<p>The first strategy is a simple moving average (SMA) stategy that:</p>
+<blockquote>
+<div><p>For this recipe, we consider a basic strategy based on the SMA. The key points of the strategy are as follows:</p>
+<ul class="simple">
+<li><p>When the close price becomes higher than the 20-day SMA, buy one share.</p></li>
+<li><p>When the close price becomes lower than the 20-day SMA and we have a share, sell it.</p></li>
+<li><p>We can only have a maximum of one share at any given time.</p></li>
+<li><p>No short selling is allowed.</p></li>
+</ul>
+</div></blockquote>
+<p>We do these calculations in <em>dollar</em> terms instead of <em>share</em> terms.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aapl</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
+<span class="n">aapl</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">aapl</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
+</pre></div>
+</div>
+</div>
+</div>
+<p>Second, we calculate daily returns and add SMA(20) for the adjusted close.
+We use the adjust close because we do not want to misinterpret splits and dividends as price changes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aapl</span><span class="p">[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">aapl</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
+<span class="n">aapl</span><span class="p">[</span><span class="s1">&#39;SMA20&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">aapl</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Third, we add a <code class="docutils literal notranslate"><span class="pre">Position</span></code> column based on AAPL’s adjusted close and SMA(20) columns.
+<code class="docutils literal notranslate"><span class="pre">Position</span></code> takes one of two values: <code class="docutils literal notranslate"><span class="pre">1</span></code> if we are long AAPL and <code class="docutils literal notranslate"><span class="pre">0</span></code> if we are neutral AAPL.
+<code class="docutils literal notranslate"><span class="pre">np.select()</span></code> avoids nested <code class="docutils literal notranslate"><span class="pre">np.where()</span></code> and accepts a default.
+We <code class="docutils literal notranslate"><span class="pre">.shift()</span></code> inputs one day because we do not know closing prices and SMA(20) until the end of the day.
+Therefore, we cannot update <code class="docutils literal notranslate"><span class="pre">Position</span></code> until the next trading day.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aapl</span><span class="p">[</span><span class="s1">&#39;Position&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+    <span class="n">condlist</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">aapl</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">aapl</span><span class="p">[</span><span class="s1">&#39;SMA20&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(),</span> <span class="c1"># .shift() to use lagged values to prevent look-ahead bias</span>
+        <span class="n">aapl</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">aapl</span><span class="p">[</span><span class="s1">&#39;SMA20&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">()</span> <span class="c1"># .shift() has a default of looking up one row</span>
+    <span class="p">],</span> 
+    <span class="n">choicelist</span><span class="o">=</span><span class="p">[</span>
+        <span class="mi">1</span><span class="p">,</span> 
+        <span class="mi">0</span>
+    <span class="p">],</span>
+    <span class="n">default</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>I find the following two steps helpful.
+First, plot the adjusted close, SMA(20), and position for a short window.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aapl</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;1981-01&#39;</span><span class="p">:</span><span class="s1">&#39;1981-02&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">,</span> <span class="s1">&#39;SMA20&#39;</span><span class="p">,</span> <span class="s1">&#39;Position&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">secondary_y</span><span class="o">=</span><span class="s1">&#39;Position&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;AAPL SMA(20) Strategy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9e45f93c5fae161771c158b33b6cd1a8ca930857f7ee1af5704a2d7af1ed546c.png" src="../_images/9e45f93c5fae161771c158b33b6cd1a8ca930857f7ee1af5704a2d7af1ed546c.png" />
+</div>
+</div>
+<p>Second, copy-and-paste these data to Excel!
+Excel is an excellent place to check your work!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># aapl.loc[:&#39;1981-02&#39;].to_clipboard()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we create a <code class="docutils literal notranslate"><span class="pre">Strategy</span></code> column that provides the return on the strategy.
+We will assume that we earn a cash return of 0% when we are neutral AAPL.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aapl</span><span class="p">[</span><span class="s1">&#39;Strategy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">aapl</span><span class="p">[</span><span class="s1">&#39;Position&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">aapl</span><span class="p">[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aapl</span><span class="p">[[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">,</span> <span class="s1">&#39;SMA20&#39;</span><span class="p">,</span> <span class="s1">&#39;Position&#39;</span><span class="p">,</span> <span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="s1">&#39;Strategy&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Adj Close</th>
+      <th>SMA20</th>
+      <th>Position</th>
+      <th>AAPL</th>
+      <th>Strategy</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1981-01-13</th>
+      <td>0.1060</td>
+      <td>0.1081</td>
+      <td>1.0000</td>
+      <td>-0.0356</td>
+      <td>-0.0356</td>
+    </tr>
+    <tr>
+      <th>1981-01-14</th>
+      <td>0.1064</td>
+      <td>0.1087</td>
+      <td>0.0000</td>
+      <td>0.0041</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>1981-01-15</th>
+      <td>0.1086</td>
+      <td>0.1098</td>
+      <td>0.0000</td>
+      <td>0.0204</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>1981-01-16</th>
+      <td>0.1077</td>
+      <td>0.1107</td>
+      <td>0.0000</td>
+      <td>-0.0080</td>
+      <td>-0.0000</td>
+    </tr>
+    <tr>
+      <th>1981-01-19</th>
+      <td>0.1142</td>
+      <td>0.1118</td>
+      <td>0.0000</td>
+      <td>0.0605</td>
+      <td>0.0000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can plot the cumulative return on 1 dollar invested in this SMA(20) strategy.
+We drop missing values to make an apples-to-apples comparison between the buy-and-hold and SMA(20) strategies.
+There may be missing values for both strategies because:</p>
+<ol class="arabic simple">
+<li><p>We need 2 days to calculate 1 daily return</p></li>
+<li><p>We need 20 days to calculate the first SMA(20)</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">aapl</span>
+    <span class="p">[[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="s1">&#39;Strategy&#39;</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">cumprod</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Strategy&#39;</span><span class="p">:</span> <span class="s1">&#39;SMA(20)&#39;</span><span class="p">})</span>
+    <span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">buy_date</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">aapl</span>
+    <span class="p">[[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="s1">&#39;Strategy&#39;</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> 
+    <span class="n">pd</span><span class="o">.</span><span class="n">offsets</span><span class="o">.</span><span class="n">BDay</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Value ($)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Value of $1 Invested</span><span class="se">\n</span><span class="s1">at Close Price on </span><span class="si">{</span><span class="n">buy_date</span><span class="si">:</span><span class="s1">%B %d, %Y</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6aa1a0e24b24757bbcbc8e8983c94fde6c4f399a3e91b933c27975a42a3afce9.png" src="../_images/6aa1a0e24b24757bbcbc8e8983c94fde6c4f399a3e91b933c27975a42a3afce9.png" />
+</div>
+</div>
+</section>
+<section id="calculating-bollinger-bands-and-testing-a-buy-sell-strategy">
+<h2>Calculating Bollinger Bands and testing a buy/sell strategy<a class="headerlink" href="#calculating-bollinger-bands-and-testing-a-buy-sell-strategy" title="Permalink to this heading">#</a></h2>
+<p>John Bollinger developed Bollinger Bands in the early 1980s.
+He describes Bollinger Bands as follows:</p>
+<blockquote>
+<div><p>So what are Bollinger Bands? They are curves drawn in and around the price structure usually consisting of a moving average (the middle band), an upper band, and a lower band that answer the question as to whether prices are high or low on a relative basis. Bollinger Bands work best when the middle band is chosen to reflect the intermediate-term trend, so that trend information is combined with relative price level data.</p>
+</div></blockquote>
+<p>More <a class="reference external" href="https://www.bollingerbands.com/bollinger-bands">here</a>.
+John Bollinger provides a list of rules <a class="reference external" href="https://www.bollingerbands.com/bollinger-band-rules">here</a>.
+In short, Bollinger Bands are bands around a trend (typically <span class="math notranslate nohighlight">\(\mu_{price} \pm 2\sigma_{price}\)</span> using 20 trading days).
+Technical analysts use these bands to signal high and low prices.</p>
+<p>Lewinson builds Bollinger Bands with the backtrader package, but we will build Bollinger Bands with pandas.
+Lewinson desribes Bollinger Bands as follows:</p>
+<blockquote>
+<div><p>Bollinger Bands are a statistical method, used for deriving information about the prices and volatility of a certain asset over time. To obtain the Bollinger Bands, we need to calculate the moving average and standard deviation of the time series (prices), using a specified window (typically, 20 days). Then, we set the upper/lower bands at K times (typically, 2) the moving standard deviation above/below the moving average.</p>
+<p>The interpretation of the bands is quite sample: the bands widen with an increase in volatility and contract with a decrease in volatility.</p>
+<p>In this recipe, we build a simple trading strategy, with the following rules:</p>
+<ul class="simple">
+<li><p>Buy when the price crosses the lower Bollinger Band upwards.</p></li>
+<li><p>Sell (only if stocks are in possession) when the price crosses the upper Bollinger Band downward.</p></li>
+<li><p>All-in strategy—when creating a buy order, buy as many shares as possible.</p></li>
+<li><p>Short selling is not allowed.</p></li>
+</ul>
+</div></blockquote>
+<p>We will implement Lewinson’s strategy with Tesla.
+First, we will plot the 20-day rolling means and plus/minus 2 standard deviations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;TSLA&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
+<span class="n">tsla</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">tsla</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;TSLA&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">win</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">tsla</span><span class="p">[[</span><span class="s1">&#39;SMA20&#39;</span><span class="p">,</span> <span class="s1">&#39;SMV20&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">win</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">])</span>
+<span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;LB20&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;SMA20&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">K</span><span class="o">*</span><span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;SMV20&#39;</span><span class="p">]</span>
+<span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;UB20&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;SMA20&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">K</span><span class="o">*</span><span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;SMV20&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2020&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">,</span> <span class="s1">&#39;LB20&#39;</span><span class="p">,</span> <span class="s1">&#39;UB20&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="s1">&#39;g--&#39;</span><span class="p">,</span> <span class="s1">&#39;g--&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">,</span> <span class="s1">&#39;Bollinger Bands&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Price ($)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;TSLA Bollinger Band (</span><span class="si">{</span><span class="n">win</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">K</span><span class="si">}</span><span class="s1">) Strategy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3b75c797ce34e011b19f004f0cbba9db631d6dac418ddc568ad3882191f2b7d3.png" src="../_images/3b75c797ce34e011b19f004f0cbba9db631d6dac418ddc568ad3882191f2b7d3.png" />
+</div>
+</div>
+<p>We will implement the TSLA Bollinger Band (20, 2) strategy in class.</p>
+<p>The following code highlights <em><strong>possible changes</strong></em> in position.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;Position&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+    <span class="n">condlist</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;LB20&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> 
+            <span class="p">(</span><span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;LB20&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;UB20&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> 
+            <span class="p">(</span><span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;UB20&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="p">],</span> 
+    <span class="n">choicelist</span><span class="o">=</span><span class="p">[</span>
+        <span class="mi">1</span><span class="p">,</span>
+        <span class="mi">0</span>
+    <span class="p">],</span>
+    <span class="n">default</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following code carries forward our last change in position.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;Position&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;Position&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;ffill&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following code puts together the return on the BB(20, 2) strategy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;Strategy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;Position&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">tsla</span><span class="p">[</span><span class="s1">&#39;TSLA&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">tsla</span>
+    <span class="p">[[</span><span class="s1">&#39;TSLA&#39;</span><span class="p">,</span> <span class="s1">&#39;Strategy&#39;</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">cumprod</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Strategy&#39;</span><span class="p">:</span> <span class="s1">&#39;BB(20, 2)&#39;</span><span class="p">})</span>
+    <span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">buy_date</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">tsla</span>
+    <span class="p">[[</span><span class="s1">&#39;TSLA&#39;</span><span class="p">,</span> <span class="s1">&#39;Strategy&#39;</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> 
+    <span class="n">pd</span><span class="o">.</span><span class="n">offsets</span><span class="o">.</span><span class="n">BDay</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Value ($)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Value of $1 Invested</span><span class="se">\n</span><span class="s1"> at Close Price on </span><span class="si">{</span><span class="n">buy_date</span><span class="si">:</span><span class="s1">%B %d, %Y</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/27b73fc4c7cfd50a53655996b339a031a3b93b6a047ac7dd780ec53854aca017.png" src="../_images/27b73fc4c7cfd50a53655996b339a031a3b93b6a047ac7dd780ec53854aca017.png" />
+</div>
+</div>
+</section>
+<section id="calculating-the-relative-strength-index-and-testing-a-long-short-strategy">
+<h2>Calculating the relative strength index and testing a long/short strategy<a class="headerlink" href="#calculating-the-relative-strength-index-and-testing-a-long-short-strategy" title="Permalink to this heading">#</a></h2>
+<p>Lewinson describes the relative strength index (RSI) as follows:</p>
+<blockquote>
+<div><p>The RSI is an indicator that uses the closing prices of an asset to identify oversold/overbought conditions. Most commonly, the RSI is calculated using a 14-day period, and it is measured on a scale from 0 to 100 (it is an oscillator). Traders usually buy an asset when it is oversold (if the RSI is below 30), and sell when it is overbought (if the RSI is above 70). More extreme high/low levels, such as 80-20, are used less frequently and, at the same time, imply stronger momentum.</p>
+<p>In this recipe, we build a trading strategy with the following rules:</p>
+<ul class="simple">
+<li><p>We can go long and short.</p></li>
+<li><p>For calculating the RSI, we use 14 periods (trading days).</p></li>
+<li><p>Enter a long position if the RSI crosses the lower threshold (standard value of 30) upwards; exit the position when the RSI becomes larger than the middle level (value of 50).</p></li>
+<li><p>Enter a short position if the RSI crosses the upper threshold (standard value of 70) downwards; exit the position when the RSI becomes smaller than 50.</p></li>
+<li><p>Only one position can be open at a time.</p></li>
+</ul>
+</div></blockquote>
+<p>Lewinson uses a package to calculate the RSI and implement his strategy above.
+We do not need a package!
+Here is RSI’s formula: $<span class="math notranslate nohighlight">\(RSI = 100 - \frac{100}{1 + RS},\)</span><span class="math notranslate nohighlight">\( where \)</span><span class="math notranslate nohighlight">\(RS = \frac{SMA(U, n)}{SMA(D, n)}.\)</span><span class="math notranslate nohighlight">\(
+For &quot;up days&quot;, \)</span>U = \Delta Adj\ Close<span class="math notranslate nohighlight">\( and \)</span>D = 0<span class="math notranslate nohighlight">\(.
+For &quot;down days&quot;, \)</span>U = 0<span class="math notranslate nohighlight">\( and \)</span>D = - \Delta Adj\ Close<span class="math notranslate nohighlight">\(, so that \)</span>U<span class="math notranslate nohighlight">\( and \)</span>D$ are always non-negative.
+We can learn more about RSI <a class="reference external" href="https://en.wikipedia.org/wiki/Relative_strength_index">here</a>.</p>
+<p>We will use Tesla data, again, for this section, but in a new data frame <code class="docutils literal notranslate"><span class="pre">tsla2</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla2</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;TSLA&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla2</span><span class="p">[</span><span class="s1">&#39;TSLA&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tsla2</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>First, we will write a function <code class="docutils literal notranslate"><span class="pre">rsi()</span></code> that calculates <span class="math notranslate nohighlight">\(RSI\)</span> for a return series.
+Here are some details:</p>
+<ol class="arabic simple">
+<li><p>We will make <code class="docutils literal notranslate"><span class="pre">rsi()</span></code>’s accept a series <code class="docutils literal notranslate"><span class="pre">x</span></code>, which can be either a series of dollar changes or a series of simple returns</p></li>
+<li><p>We will make <code class="docutils literal notranslate"><span class="pre">rsi()</span></code>’s default window <code class="docutils literal notranslate"><span class="pre">n=14</span></code></p></li>
+</ol>
+<p>Second, we will use <code class="docutils literal notranslate"><span class="pre">rsi()</span></code> to implement the RSI(14) strategy for TSLA.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">win2</span> <span class="o">=</span> <span class="mi">14</span>
+<span class="n">lb2</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">mb2</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">ub2</span> <span class="o">=</span> <span class="mi">70</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rsi</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">14</span><span class="p">):</span>
+    <span class="n">_U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">_D</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">_RS</span> <span class="o">=</span> <span class="n">_U</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">/</span> <span class="n">_D</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="k">return</span> <span class="mi">100</span> <span class="o">-</span> <span class="mi">100</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">_RS</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla2</span><span class="p">[</span><span class="s1">&#39;RSI&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rsi</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">tsla2</span><span class="p">[</span><span class="s1">&#39;TSLA&#39;</span><span class="p">],</span> <span class="n">n</span><span class="o">=</span><span class="n">win2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla2</span><span class="p">[</span><span class="s1">&#39;Position&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+    <span class="n">condlist</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="n">tsla2</span><span class="p">[</span><span class="s1">&#39;RSI&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">lb2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">tsla2</span><span class="p">[</span><span class="s1">&#39;RSI&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">lb2</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">tsla2</span><span class="p">[</span><span class="s1">&#39;RSI&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">mb2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">tsla2</span><span class="p">[</span><span class="s1">&#39;RSI&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">mb2</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">tsla2</span><span class="p">[</span><span class="s1">&#39;RSI&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">ub2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">tsla2</span><span class="p">[</span><span class="s1">&#39;RSI&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">ub2</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">tsla2</span><span class="p">[</span><span class="s1">&#39;RSI&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">mb2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">tsla2</span><span class="p">[</span><span class="s1">&#39;RSI&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">mb2</span><span class="p">),</span>
+    <span class="p">],</span> 
+    <span class="n">choicelist</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="n">default</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="p">)</span>
+<span class="n">tsla2</span><span class="p">[</span><span class="s1">&#39;Position&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;ffill&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla2</span><span class="p">[</span><span class="s1">&#39;Strategy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tsla2</span><span class="p">[</span><span class="s1">&#39;Position&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">tsla2</span><span class="p">[</span><span class="s1">&#39;TSLA&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">tsla2</span>
+    <span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2020&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;TSLA&#39;</span><span class="p">,</span> <span class="s1">&#39;Strategy&#39;</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">cumprod</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Strategy&#39;</span><span class="p">:</span> <span class="s1">&#39;RSI(14)&#39;</span><span class="p">})</span>
+    <span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">buy_date</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">tsla2</span>
+    <span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2020&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;TSLA&#39;</span><span class="p">,</span> <span class="s1">&#39;Strategy&#39;</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> 
+    <span class="n">pd</span><span class="o">.</span><span class="n">offsets</span><span class="o">.</span><span class="n">BDay</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Value ($)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Value of $1 Invested</span><span class="se">\n</span><span class="s1"> at Close Price on </span><span class="si">{</span><span class="n">buy_date</span><span class="si">:</span><span class="s1">%B %d, %Y</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/61a0241a6fc382b8e6472486e5e169c01fe01ddf6c56d5842f7b3ea7a57fd683.png" src="../_images/61a0241a6fc382b8e6472486e5e169c01fe01ddf6c56d5842f7b3ea7a57fd683.png" />
+</div>
+</div>
+</section>
+<section id="practice">
+<h2>Practice<a class="headerlink" href="#practice" title="Permalink to this heading">#</a></h2>
+<p><em><strong>Practice:</strong></em>
+Implement the SMA(20) strategy above with AAPL with one chained calculation.
+Save assign this new data frame to <code class="docutils literal notranslate"><span class="pre">aapl2</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sma</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span>
+        <span class="n">RET</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">(),</span>
+        <span class="n">SMA20</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+        <span class="n">Position</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+            <span class="n">condlist</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;SMA20&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(),</span>
+                <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;SMA20&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">()</span>
+            <span class="p">],</span> 
+            <span class="n">choicelist</span><span class="o">=</span><span class="p">[</span>
+                <span class="mi">1</span><span class="p">,</span> 
+                <span class="mi">0</span>
+            <span class="p">],</span>
+            <span class="n">default</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+        <span class="p">),</span>
+        <span class="n">Strategy</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Position&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;RET&#39;</span><span class="p">]</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aapl2</span> <span class="o">=</span> <span class="n">sma</span><span class="p">(</span><span class="n">aapl</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">6</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><em><strong>Practice:</strong></em>
+Use <code class="docutils literal notranslate"><span class="pre">np.allclose()</span></code> to compare <code class="docutils literal notranslate"><span class="pre">aapl</span></code> and <code class="docutils literal notranslate"><span class="pre">aapl2</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">aapl</span><span class="p">,</span> <span class="n">aapl</span><span class="p">,</span> <span class="n">equal_nan</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">aapl</span><span class="p">,</span> <span class="n">aapl2</span><span class="p">,</span> <span class="n">equal_nan</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p><em><strong>Practice:</strong></em>
+What is the full-sample Sharpe Ratio for the SMA(20) strategy with AAPL?
+Use the risk-free rate <code class="docutils literal notranslate"><span class="pre">RF</span></code> from Ken French’s daily factors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ff</span> <span class="o">=</span> <span class="n">pdr</span><span class="o">.</span><span class="n">get_data_famafrench</span><span class="p">(</span><span class="s1">&#39;F-F_Research_Data_Factors_daily&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="s1">&#39;1900&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sharpe_ratio</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">bm</span><span class="p">,</span> <span class="n">ann_fac</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">252</span><span class="p">)):</span>
+    <span class="n">er</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">bm</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ann_fac</span> <span class="o">*</span> <span class="n">er</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">/</span> <span class="n">er</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sharpe_ratio</span><span class="p">(</span><span class="n">r</span><span class="o">=</span><span class="n">aapl</span><span class="p">[[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="s1">&#39;Strategy&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span> <span class="n">bm</span><span class="o">=</span><span class="n">ff</span><span class="p">[</span><span class="s1">&#39;RF&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AAPL       0.5263
+Strategy   0.6384
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also <code class="docutils literal notranslate"><span class="pre">.pipe()</span></code> to the <code class="docutils literal notranslate"><span class="pre">sharpe_ratio()</span></code> function to keep a left-to-right sentence structure.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aapl</span><span class="p">[[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="s1">&#39;Strategy&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">sharpe_ratio</span><span class="p">,</span> <span class="n">bm</span><span class="o">=</span><span class="n">ff</span><span class="p">[</span><span class="s1">&#39;RF&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AAPL       0.5263
+Strategy   0.6384
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p><em><strong>Practice:</strong></em>
+The AAPL SMA(20) strategy outperformed buy-and-hold for the full sample.
+How do SMA(20) and buy-and-hold perform over rolling 6-month windows?
+Plot the values of $1 invested in each for all possible 126-trading day windows.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">aapl</span><span class="p">[[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="s1">&#39;Strategy&#39;</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">126</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">prod</span><span class="p">())</span>
+    <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Strategy&#39;</span><span class="p">:</span> <span class="s1">&#39;SMA(20)&#39;</span><span class="p">})</span>
+    <span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Value of \$1 Invested ($)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Six-Month Rolling Windows&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/0f679dbf5576c35512c253b748b668c5af02624abb2510a3ff24a1bafe72ae38.png" src="../_images/0f679dbf5576c35512c253b748b668c5af02624abb2510a3ff24a1bafe72ae38.png" />
+</div>
+</div>
+<p>We can take the ratio of SMA(20) to AAPL as a measure of outperformance.
+In some cases SMA(20) outperformance by 2x or more, but otherwise SMA(20) has no clear advantage over buy-and-hold.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">aapl</span><span class="p">[[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="s1">&#39;Strategy&#39;</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">126</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">prod</span><span class="p">())</span>
+    <span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">strat_appl</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Strategy&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">])</span>
+    <span class="p">[</span><span class="s1">&#39;strat_appl&#39;</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Relative Value of \$1 Invested (SMA(20)/AAPL)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Six-Month Rolling Windows&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a97dade7fe09ba853e07cf08f351f74795e31823026bbbacd07378bb899be121.png" src="../_images/a97dade7fe09ba853e07cf08f351f74795e31823026bbbacd07378bb899be121.png" />
+</div>
+</div>
+<p>Can we speed up this code?!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
+<span class="p">(</span>
+    <span class="n">aapl</span><span class="p">[[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="s1">&#39;Strategy&#39;</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">126</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">prod</span><span class="p">())</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.8 s ± 211 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Yes!
+We can pick the low-hanging fruit with <code class="docutils literal notranslate"><span class="pre">apply()</span></code>’s <code class="docutils literal notranslate"><span class="pre">raw=True</span></code> argument, which removes the cruft and structure of pandas and passes the NumPy array directly to <code class="docutils literal notranslate"><span class="pre">np.prod()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
+<span class="p">(</span>
+    <span class="n">aapl</span><span class="p">[[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="s1">&#39;Strategy&#39;</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">126</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">prod</span><span class="p">(),</span> <span class="n">raw</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>46.9 ms ± 413 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<p>But we should switch to summing log returns if we need large speed gains.
+The following code is faster than the two options above because the <code class="docutils literal notranslate"><span class="pre">.sum()</span></code> method is optimized.
+We can sum log returns (then exponentiate) because the log of products is the sum of logs.
+For example,
+$<span class="math notranslate nohighlight">\(1+R_{Total} = (1+R_1)(1+R2)\cdots(1+R_T),\)</span><span class="math notranslate nohighlight">\(
+and then we exponentiate then log both sides
+\)</span><span class="math notranslate nohighlight">\(\exp(\log(1+R_{Total})) = \exp(\log((1+R_1)(1+R2)\cdots(1+R_T))),\)</span><span class="math notranslate nohighlight">\(
+and then the log of products is sum of logs
+\)</span><span class="math notranslate nohighlight">\(\exp(\log(1+R_{Total})) = \exp(\log(1+R_1) + \log(1+R_2) + \cdots + \log(1+R_T))) = \exp\left(\sum_{t=1}^{T} \log(1+R_t)\right),\)</span><span class="math notranslate nohighlight">\(
+so
+\)</span><span class="math notranslate nohighlight">\(R_{Total} = \exp\left(\sum_{t=1}^{T} \log(1+R_t)\right) - 1\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
+<span class="p">(</span>
+    <span class="n">aapl</span><span class="p">[[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="s1">&#39;Strategy&#39;</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">126</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.28 ms ± 76.7 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<p><em><strong>Practice:</strong></em>
+Implement the BB(20, 2) strategy above with TSLA with one chained calculation.
+Save assign this new data frame to <code class="docutils literal notranslate"><span class="pre">tsla3</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bb</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">win</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">df</span>
+        <span class="o">.</span><span class="n">assign</span><span class="p">(</span>
+            <span class="n">RET</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">(),</span>
+            <span class="n">SMA</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">win</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+            <span class="n">SMV</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">win</span><span class="p">)</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span>
+            <span class="n">LB</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;SMA&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">K</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;SMV&#39;</span><span class="p">],</span>
+            <span class="n">UB</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;SMA&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">K</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;SMV&#39;</span><span class="p">],</span>
+            <span class="n">_Position</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">select</span><span class="p">(</span> <span class="c1"># cannot modify a column twice, so we make a temporary column that we later drop</span>
+                <span class="n">condlist</span><span class="o">=</span><span class="p">[</span>
+                    <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;LB&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;LB&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+                    <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;UB&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;UB&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+                <span class="p">],</span> 
+                <span class="n">choicelist</span><span class="o">=</span><span class="p">[</span>
+                    <span class="mi">1</span><span class="p">,</span>
+                    <span class="mi">0</span>
+                <span class="p">],</span>
+                <span class="n">default</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+            <span class="p">),</span>
+            <span class="n">Position</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;_Position&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;ffill&#39;</span><span class="p">),</span>
+            <span class="n">Strategy</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Position&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;RET&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;_Position&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla3</span> <span class="o">=</span> <span class="n">bb</span><span class="p">(</span><span class="n">tsla</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">6</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">tsla</span><span class="p">,</span> <span class="n">tsla3</span><span class="p">,</span> <span class="n">equal_nan</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p><em><strong>Practice:</strong></em>
+What is the full-sample Sharpe Ratio for the BB(20, 2) strategy with TSLA?
+Use the risk-free rate <code class="docutils literal notranslate"><span class="pre">RF</span></code> from Ken French’s daily factors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla</span><span class="p">[[</span><span class="s1">&#39;TSLA&#39;</span><span class="p">,</span> <span class="s1">&#39;Strategy&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">sharpe_ratio</span><span class="p">,</span> <span class="n">bm</span><span class="o">=</span><span class="n">ff</span><span class="p">[</span><span class="s1">&#39;RF&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TSLA       1.0594
+Strategy   0.6685
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p><em><strong>Practice:</strong></em>
+Implement the RSI(14) strategy above with TSLA with one chained calculation.
+Save assign this new data frame to <code class="docutils literal notranslate"><span class="pre">tsla4</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rsi</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">win</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">mb</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="mi">70</span><span class="p">):</span>
+
+    <span class="c1"># we can define an _rsi() function for use inside the outer rsi() function</span>
+    <span class="k">def</span> <span class="nf">_rsi</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="n">_U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">_D</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">_RS</span> <span class="o">=</span> <span class="n">_U</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">/</span> <span class="n">_D</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="k">return</span> <span class="mi">100</span> <span class="o">-</span> <span class="mi">100</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">_RS</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span>
+            <span class="n">RET</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">(),</span>
+            <span class="n">RSI</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">_rsi</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;RET&#39;</span><span class="p">],</span> <span class="n">n</span><span class="o">=</span><span class="n">win</span><span class="p">),</span>
+            <span class="n">Position_</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+                <span class="n">condlist</span><span class="o">=</span><span class="p">[</span>
+                    <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;RSI&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">lb</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;RSI&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">lb</span><span class="p">),</span>
+                    <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;RSI&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">mb</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;RSI&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">mb</span><span class="p">),</span>
+                    <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;RSI&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">ub</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;RSI&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">ub</span><span class="p">),</span>
+                    <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;RSI&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">mb</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;RSI&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">mb</span><span class="p">),</span>
+                <span class="p">],</span> 
+                <span class="n">choicelist</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="n">default</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+            <span class="p">),</span>
+            <span class="n">Position</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Position_&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;ffill&#39;</span><span class="p">),</span>
+            <span class="n">Strategy</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Position&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;RET&#39;</span><span class="p">],</span>
+        <span class="p">)</span>
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Position_&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla2</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Adj Close</th>
+      <th>Volume</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2010-06-29</th>
+      <td>1.2667</td>
+      <td>1.6667</td>
+      <td>1.1693</td>
+      <td>1.5927</td>
+      <td>1.5927</td>
+      <td>281494500</td>
+    </tr>
+    <tr>
+      <th>2010-06-30</th>
+      <td>1.7193</td>
+      <td>2.0280</td>
+      <td>1.5533</td>
+      <td>1.5887</td>
+      <td>1.5887</td>
+      <td>257806500</td>
+    </tr>
+    <tr>
+      <th>2010-07-01</th>
+      <td>1.6667</td>
+      <td>1.7280</td>
+      <td>1.3513</td>
+      <td>1.4640</td>
+      <td>1.4640</td>
+      <td>123282000</td>
+    </tr>
+    <tr>
+      <th>2010-07-02</th>
+      <td>1.5333</td>
+      <td>1.5400</td>
+      <td>1.2473</td>
+      <td>1.2800</td>
+      <td>1.2800</td>
+      <td>77097000</td>
+    </tr>
+    <tr>
+      <th>2010-07-06</th>
+      <td>1.3333</td>
+      <td>1.3333</td>
+      <td>1.0553</td>
+      <td>1.0740</td>
+      <td>1.0740</td>
+      <td>103003500</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2022-11-03</th>
+      <td>211.3600</td>
+      <td>221.2000</td>
+      <td>210.1400</td>
+      <td>215.3100</td>
+      <td>215.3100</td>
+      <td>56538800</td>
+    </tr>
+    <tr>
+      <th>2022-11-04</th>
+      <td>222.6000</td>
+      <td>223.8000</td>
+      <td>203.0800</td>
+      <td>207.4700</td>
+      <td>207.4700</td>
+      <td>98453100</td>
+    </tr>
+    <tr>
+      <th>2022-11-07</th>
+      <td>208.6500</td>
+      <td>208.9000</td>
+      <td>196.6600</td>
+      <td>197.0800</td>
+      <td>197.0800</td>
+      <td>93916500</td>
+    </tr>
+    <tr>
+      <th>2022-11-08</th>
+      <td>194.0200</td>
+      <td>195.2000</td>
+      <td>186.7500</td>
+      <td>191.3000</td>
+      <td>191.3000</td>
+      <td>128803400</td>
+    </tr>
+    <tr>
+      <th>2022-11-09</th>
+      <td>190.7750</td>
+      <td>195.8900</td>
+      <td>177.1300</td>
+      <td>177.5900</td>
+      <td>177.5900</td>
+      <td>125228490</td>
+    </tr>
+  </tbody>
+</table>
+<p>3115 rows × 6 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla4</span> <span class="o">=</span> <span class="n">rsi</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">tsla2</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">6</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">tsla2</span><span class="p">,</span> <span class="n">tsla4</span><span class="p">,</span> <span class="n">equal_nan</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p><em><strong>Practice:</strong></em>
+What is the full-sample Sharpe Ratio for the RSI(14) strategy with TSLA?
+Use the risk-free rate <code class="docutils literal notranslate"><span class="pre">RF</span></code> from Ken French’s daily factors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsla2</span><span class="p">[[</span><span class="s1">&#39;TSLA&#39;</span><span class="p">,</span> <span class="s1">&#39;Strategy&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">sharpe_ratio</span><span class="p">,</span> <span class="n">bm</span><span class="o">=</span><span class="n">ff</span><span class="p">[</span><span class="s1">&#39;RF&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TSLA        1.0337
+Strategy   -0.5442
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Lewinson"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="lewinson-01.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lewinson Chapter 1 - Financial Data and Preprocessing</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="lewinson-04.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lewinson Chapter 4 - Multi-Factor Models</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backtesting-a-strategy-based-on-simple-moving-average">Backtesting a Strategy Based on Simple Moving Average</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-bollinger-bands-and-testing-a-buy-sell-strategy">Calculating Bollinger Bands and testing a buy/sell strategy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-the-relative-strength-index-and-testing-a-long-short-strategy">Calculating the relative strength index and testing a long/short strategy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice">Practice</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Richard Herron
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

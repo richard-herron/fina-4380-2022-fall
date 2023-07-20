@@ -1,0 +1,16 @@
+/Canvas
+/Data
+/DataCamp
+/Disability*
+/Grades
+# /Notebooks
+/Office*
+/Participation
+/Projects
+/Syllabus
+/Teammates
+*.csv
+*.txt
+*.zip
+*.xlsx
+*.sqlite

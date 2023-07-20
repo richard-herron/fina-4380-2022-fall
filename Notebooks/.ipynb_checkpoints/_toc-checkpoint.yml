@@ -1,0 +1,26 @@
+format: jb-book
+root: introduction
+parts:
+  - caption: McKinney
+    chapters:
+      - file: McKinney/mckinney-02
+      - file: McKinney/mckinney-03
+      - file: McKinney/mckinney-04
+      - file: McKinney/mckinney-05
+      - file: McKinney/mckinney-08
+      - file: McKinney/mckinney-10
+      - file: McKinney/mckinney-11
+  - caption: Lewinson
+    chapters:
+      - file: Lewinson/lewinson-01
+      - file: Lewinson/lewinson-02
+      - file: Lewinson/lewinson-04
+      - file: Lewinson/lewinson-06
+      - file: Lewinson/lewinson-07
+  - caption: Herron
+    chapters:
+      - file: Herron/herron-lookups
+      - file: Herron/herron-downloading-data
+      - file: Herron/herron-do-market-prices-respond
+      - file: Herron/herron-momentum
+      - file: Herron/herron-does-the-capm-work
