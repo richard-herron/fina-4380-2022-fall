@@ -1,0 +1,1561 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Lewinson Chapter 4 - Multi-Factor Models &#8212; FINA 4380 for Fall 2022</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lewinson Chapter 6: Monte Carlo Simulations in Finance" href="lewinson-06.html" />
+    <link rel="prev" title="Lewinson Chapter 2 - Technical Analysis in Python" href="lewinson-02.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/DMSB_100th_LogoMark_CMYK_Horiz.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">FINA 4380 for Fall 2022</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  McKinney
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../McKinney/mckinney-02.html">
+   McKinney Chapter 2 - Python Language Basics, IPython, and Jupyter Notebooks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../McKinney/mckinney-03.html">
+   McKinney Chapter 3 - Built-in Data Structures, Functions, and Files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../McKinney/mckinney-04.html">
+   McKinney Chapter 4 - NumPy Basics: Arrays and Vectorized Computation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../McKinney/mckinney-05.html">
+   McKinney Chapter 5 - Getting Started with pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../McKinney/mckinney-08.html">
+   McKinney Chapter 8 - Data Wrangling: Join, Combine, and Reshape
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../McKinney/mckinney-10.html">
+   McKinney Chapter 10 - Data Aggregation and Group Operations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../McKinney/mckinney-11.html">
+   McKinney Chapter 11 - Time Series
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lewinson
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="lewinson-01.html">
+   Lewinson Chapter 1 - Financial Data and Preprocessing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lewinson-02.html">
+   Lewinson Chapter 2 - Technical Analysis in Python
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Lewinson Chapter 4 - Multi-Factor Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lewinson-06.html">
+   Lewinson Chapter 6: Monte Carlo Simulations in Finance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lewinson-07.html">
+   Lewinson Chapter 7 - Asset Allocation in Python
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Herron
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Herron/herron-lookups.html">
+   Herron - Lookups
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Herron/herron-downloading-data.html">
+   Herron - Downloading Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Herron/herron-do-market-prices-respond.html">
+   Herron - Do market prices respond to new information?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Herron/herron-momentum.html">
+   Herron - Does momentum investing work?
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/richardcherron/fina-4380-2022-fall/main?urlpath=lab/tree/Notebooks/Lewinson/lewinson-04.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/richardcherron/fina-4380-2022-fall/blob/main/Notebooks/Lewinson/lewinson-04.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/richardcherron/fina-4380-2022-fall"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/richardcherron/fina-4380-2022-fall/issues/new?title=Issue%20on%20page%20%2FLewinson/lewinson-04.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/Lewinson/lewinson-04.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-the-capm-in-python">
+   Implementing the CAPM in Python
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-the-fama-french-three-factor-model-in-python">
+   Implementing the Fama-French three-factor model in Python
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-the-rolling-three-factor-model-on-a-portfolio-of-assets">
+   Implementing the rolling three-factor model on a portfolio of assets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-the-four-and-five-factor-models-in-python">
+   Implementing the four- and five-factor models in Python
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#practice">
+   Practice
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Lewinson Chapter 4 - Multi-Factor Models</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-the-capm-in-python">
+   Implementing the CAPM in Python
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-the-fama-french-three-factor-model-in-python">
+   Implementing the Fama-French three-factor model in Python
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-the-rolling-three-factor-model-on-a-portfolio-of-assets">
+   Implementing the rolling three-factor model on a portfolio of assets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-the-four-and-five-factor-models-in-python">
+   Implementing the four- and five-factor models in Python
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#practice">
+   Practice
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="lewinson-chapter-4-multi-factor-models">
+<h1>Lewinson Chapter 4 - Multi-Factor Models<a class="headerlink" href="#lewinson-chapter-4-multi-factor-models" title="Permalink to this headline">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+<p>Chapter 4 of Eryk Lewinson’s <a class="reference external" href="https://www.packtpub.com/product/python-for-finance-cookbook/9781789618518"><em>Python for Finance Cookbook</em></a> discusses the capital asset pricing model (CAPM) and several multi-factor models.</p>
+<p>We will focus on:</p>
+<ol class="simple">
+<li><p>Refreshing our knowledge on the CAPM, particularly how to interpret <span class="math notranslate nohighlight">\(\alpha\)</span>s and <span class="math notranslate nohighlight">\(\beta\)</span>s</p></li>
+<li><p>Implementing and interpreting multifactor models</p></li>
+</ol>
+<p><em><strong>Note:</strong></em> Indented block quotes are from Lewinson, and section numbers differ from Lewinson because we will not discuss every topic.</p>
+<p>I will simplify and streamline his code, where possible.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
+<span class="o">%</span><span class="k">precision</span> 4
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests_cache</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">requests_cache</span><span class="o">.</span><span class="n">CachedSession</span><span class="p">(</span><span class="n">expire_after</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
+<span class="kn">import</span> <span class="nn">pandas_datareader</span> <span class="k">as</span> <span class="nn">pdr</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="implementing-the-capm-in-python">
+<h2>Implementing the CAPM in Python<a class="headerlink" href="#implementing-the-capm-in-python" title="Permalink to this headline">#</a></h2>
+<p>Lewinson clearly summarizes the capital asset pricing model (CAPM):</p>
+<blockquote>
+<div><p>In this recipe, we learn how to estimate the famous Capital Asset Pricing Model (CAPM) and obtain the beta coefficient. This model represents the relationship between the expected return on a risky asset and the market risk (also known as systematic or undiversifiable risk). CAPM can be considered a one-factor model, on top of which more complex factor models were built.</p>
+<p>CAPM is represented by the following equation: $<span class="math notranslate nohighlight">\(E(r_i) = r_f + \beta_i (E(r_m) - r_f)\)</span>$</p>
+<p>Here, <span class="math notranslate nohighlight">\(E(r_i)\)</span> denotes the expected return on asset <span class="math notranslate nohighlight">\(i\)</span>, <span class="math notranslate nohighlight">\(r_f\)</span> is the risk-free rate (such as a government bond), <span class="math notranslate nohighlight">\(E(r_m)\)</span> is the expected return on the market, and <span class="math notranslate nohighlight">\(\beta_i\)</span> is the beta coefficient.</p>
+<p>Beta can be interpreted as the level of the asset return’s sensitivity, as compared to the market in general. Some possible examples include:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\beta &lt;= -1\)</span>: The asset moves in the opposite direction as the benchmark and in a greater amount than the negative of the benchmark.</p></li>
+<li><p><span class="math notranslate nohighlight">\(-1 &lt; \beta &lt; 0\)</span>: The asset moves in the opposite direction to the benchmark.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta = 0\)</span>: There is no correlation between the asset’s price movement and the market benchmark.</p></li>
+<li><p><span class="math notranslate nohighlight">\(0 &lt; \beta &lt; 1\)</span>: The asset moves in the same direction as the market, but the amount is smaller. An example might be the stock of a company that is not very susceptible to day-to-day fluctuations.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta = 1\)</span>: The asset and the market are moving in the same direction by the same amount.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta &gt; 1\)</span>: The asset moves in the same direction as the market, but the amount is greater. An example might be the stock of a company that is very susceptible to day-to-day market news.</p></li>
+</ul>
+<p>CAPM can also be represented: $<span class="math notranslate nohighlight">\(E(r_i) - r_f = \beta_i (E(r_m) - r_F)\)</span>$</p>
+<p>Here, the left-hand side of the equation can be interpreted as the risk premium, while the right-hand side contains the market premium. The same equation can be reshaped into: $<span class="math notranslate nohighlight">\(\beta_i = \frac{cov(R_i, R_m)}{var(R_m)}\)</span>$</p>
+<p>Here, <span class="math notranslate nohighlight">\(R_i = E(r_i) - r_f\)</span> and <span class="math notranslate nohighlight">\(R_m = E(r_m) - r_f\)</span>.</p>
+</div></blockquote>
+<p>We will follow Lewinson’s layout, but change his syntax to match the syntax we use elsewhere in the course.
+To move beyond the CAPM, we need the statsmodels package for linear regressions and rolling linear regressions.
+We will use statsmodels’ formula API (advanced programming interface) to match R’s regression formulas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will also estimate the CAPM for Amazon (AMZN), but we will not limit our data download.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">amzn</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span><span class="o">=</span><span class="s1">&#39;AMZN&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
+<span class="n">amzn</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">amzn</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lewinson uses the S&amp;P 500 index from Yahoo! Finance (ticker <code class="docutils literal notranslate"><span class="pre">^GSPC</span></code>) as his market return.
+<code class="docutils literal notranslate"><span class="pre">^GSPC</span></code> is not a total return index, so it excludes dividends and is incorrect for CAPM estimations.
+Instead, we will use Ken French’s <code class="docutils literal notranslate"><span class="pre">Mkt-RF</span></code>, which is the excess return on the total market.
+Ken French also provides the risk-free rate (<code class="docutils literal notranslate"><span class="pre">RF</span></code>).
+Note that we specify an early start date to download and parse all available data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ff</span> <span class="o">=</span> <span class="n">pdr</span><span class="o">.</span><span class="n">get_data_famafrench</span><span class="p">(</span><span class="s1">&#39;F-F_Research_Data_Factors_daily&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="s1">&#39;1900&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ff</span></code> is a dictionary</p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">0</span></code> item is the data frame of returns</p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">DESCR</span></code> item is the data description</p></li>
+<li><p>returns are in percents instead of decimals</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">ff</span><span class="p">[</span><span class="s1">&#39;DESCR&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>F-F Research Data Factors daily
+-------------------------------
+
+This file was created by CMPT_ME_BEME_RETS_DAILY using the 202209 CRSP database. The Tbill return is the simple daily rate that, over the number of trading days in the month, compounds to 1-month TBill rate from Ibbotson and Associates Inc. Copyright 2022 Kenneth R. French
+
+  0 : (25336 rows x 4 cols)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">amzn</span> <span class="o">=</span> <span class="n">amzn</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ff</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will also estimate <span class="math notranslate nohighlight">\(\beta\)</span>s from daily data.
+It is optimal to estimate <span class="math notranslate nohighlight">\(\beta\)</span>s from one to three years of daily data.
+We will add the <code class="docutils literal notranslate"><span class="pre">r</span></code> and <code class="docutils literal notranslate"><span class="pre">R</span></code> columns that Lewinson uses in his formulas for raw and excess returns, respectively.
+We will keep all returns in percent because regressions with precent are easier to interpret than regressions with zeros.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">amzn</span> <span class="o">=</span> <span class="n">amzn</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span>
+    <span class="n">rf</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;RF&#39;</span><span class="p">],</span>
+    <span class="n">rm</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Mkt-RF&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;RF&#39;</span><span class="p">],</span>
+    <span class="n">Rm</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Mkt-RF&#39;</span><span class="p">],</span>
+    <span class="n">ri</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">(),</span>
+    <span class="n">Ri</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;ri&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;rf&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>First, we can estimate <span class="math notranslate nohighlight">\(\beta_i\)</span> with the covariance approach.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cov</span> <span class="o">=</span> <span class="n">amzn</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2020-09&#39;</span><span class="p">:,</span> <span class="p">[</span><span class="s1">&#39;Ri&#39;</span><span class="p">,</span> <span class="s1">&#39;Rm&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">cov</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cov</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Ri</th>
+      <th>Rm</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Ri</th>
+      <td>5.5366</td>
+      <td>2.1612</td>
+    </tr>
+    <tr>
+      <th>Rm</th>
+      <td>2.1612</td>
+      <td>1.5163</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Because <span class="math notranslate nohighlight">\(var(R_m) = cov(R_m, R_m)\)</span>, we do not need to recalculate the market variance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">beta</span> <span class="o">=</span> <span class="n">cov</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Ri&#39;</span><span class="p">,</span> <span class="s1">&#39;Rm&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">cov</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Rm&#39;</span><span class="p">,</span> <span class="s1">&#39;Rm&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;AMZN beta: </span><span class="si">{</span><span class="n">beta</span><span class="si">:</span><span class="s1">0.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AMZN beta: 1.4253
+</pre></div>
+</div>
+</div>
+</div>
+<p>Second, we can estimate <span class="math notranslate nohighlight">\(\beta_i\)</span> with a linear regression.
+We will use statsmodels’ formula API, which provides an R-like formula syntax.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">capm_fit</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s1">&#39;Ri ~ Rm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">amzn</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2020-09&#39;</span><span class="p">:])</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">capm_fit</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>           <td>Ri</td>        <th>  R-squared:         </th> <td>   0.556</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.555</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   655.8</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Wed, 16 Nov 2022</td> <th>  Prob (F-statistic):</th> <td>2.36e-94</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>16:10:39</td>     <th>  Log-Likelihood:    </th> <td> -980.34</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   525</td>      <th>  AIC:               </th> <td>   1965.</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   523</td>      <th>  BIC:               </th> <td>   1973.</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   -0.0704</td> <td>    0.068</td> <td>   -1.028</td> <td> 0.304</td> <td>   -0.205</td> <td>    0.064</td>
+</tr>
+<tr>
+  <th>Rm</th>        <td>    1.4253</td> <td>    0.056</td> <td>   25.609</td> <td> 0.000</td> <td>    1.316</td> <td>    1.535</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>163.635</td> <th>  Durbin-Watson:     </th> <td>   1.980</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td>2869.374</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.875</td>  <th>  Prob(JB):          </th> <td>    0.00</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td>14.319</td>  <th>  Cond. No.          </th> <td>    1.23</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+<p>Third, we can visualize the CAPM <span class="math notranslate nohighlight">\(\beta\)</span> as the slope of the best fit line through a scatter plot of stock (or portfolio) excess returns against market excess returns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">amzn</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2020-09&#39;</span><span class="p">:]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Rm&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Ri&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Daily Excess Stock Return (%)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Daily Excess Market Return (%)&#39;</span><span class="p">)</span>
+<span class="n">first_date</span> <span class="o">=</span> <span class="n">amzn</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2020-09&#39;</span><span class="p">:,</span> <span class="p">[</span><span class="s1">&#39;Ri&#39;</span><span class="p">,</span> <span class="s1">&#39;Rm&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">last_date</span> <span class="o">=</span> <span class="n">amzn</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2020-09&#39;</span><span class="p">:,</span> <span class="p">[</span><span class="s1">&#39;Ri&#39;</span><span class="p">,</span> <span class="s1">&#39;Rm&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Beta Plot for AMZN Daily Returns</span><span class="se">\n</span><span class="s1"> from </span><span class="si">{</span><span class="n">first_date</span><span class="si">:</span><span class="s1">%Y-%m-%d</span><span class="si">}</span><span class="s1"> to </span><span class="si">{</span><span class="n">last_date</span><span class="si">:</span><span class="s1">%Y-%m-%d</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/richard/.local/lib/python3.10/site-packages/pandas/plotting/_matplotlib/core.py:1114: UserWarning: No data for colormapping provided via &#39;c&#39;. Parameters &#39;cmap&#39; will be ignored
+  scatter = ax.scatter(
+</pre></div>
+</div>
+<img alt="../_images/lewinson-04_26_1.png" src="../_images/lewinson-04_26_1.png" />
+</div>
+</div>
+<p>The easiest way to add the best-fit-line is to use <code class="docutils literal notranslate"><span class="pre">regplot()</span></code> from the seaborn package.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Rm&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Ri&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">amzn</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2020-09&#39;</span><span class="p">:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Daily Excess Stock Return (%)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Daily Excess Market Return (%)&#39;</span><span class="p">)</span>
+<span class="n">first_date</span> <span class="o">=</span> <span class="n">amzn</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2020-09&#39;</span><span class="p">:,</span> <span class="p">[</span><span class="s1">&#39;Ri&#39;</span><span class="p">,</span> <span class="s1">&#39;Rm&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">last_date</span> <span class="o">=</span> <span class="n">amzn</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2020-09&#39;</span><span class="p">:,</span> <span class="p">[</span><span class="s1">&#39;Ri&#39;</span><span class="p">,</span> <span class="s1">&#39;Rm&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Beta Plot for AMZN Daily Returns</span><span class="se">\n</span><span class="s1"> from </span><span class="si">{</span><span class="n">first_date</span><span class="si">:</span><span class="s1">%Y-%m-%d</span><span class="si">}</span><span class="s1"> to </span><span class="si">{</span><span class="n">last_date</span><span class="si">:</span><span class="s1">%Y-%m-%d</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/lewinson-04_29_0.png" src="../_images/lewinson-04_29_0.png" />
+</div>
+</div>
+<p>We add the <code class="docutils literal notranslate"><span class="pre">Ri</span></code> and <code class="docutils literal notranslate"><span class="pre">Rm</span></code> columns to follow Lewinson’s syntax.
+However, the formula API provides two functions that help us avoid adding columns just for a regression:</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">I()</span></code> lets us preform calculations on-the-fly inside a formula</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Q()</span></code> lets us use columns with bad names that contain spaces and other characters that would confuse our formula</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s1">&#39;I(ri - rf) ~ Q(&quot;Mkt-RF&quot;)&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">amzn</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2020-09&#39;</span><span class="p">:])</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>       <td>I(ri - rf)</td>    <th>  R-squared:         </th> <td>   0.556</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.555</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   655.8</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Wed, 16 Nov 2022</td> <th>  Prob (F-statistic):</th> <td>2.36e-94</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>16:10:39</td>     <th>  Log-Likelihood:    </th> <td> -980.34</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   525</td>      <th>  AIC:               </th> <td>   1965.</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   523</td>      <th>  BIC:               </th> <td>   1973.</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+       <td></td>          <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>   <td>   -0.0704</td> <td>    0.068</td> <td>   -1.028</td> <td> 0.304</td> <td>   -0.205</td> <td>    0.064</td>
+</tr>
+<tr>
+  <th>Q("Mkt-RF")</th> <td>    1.4253</td> <td>    0.056</td> <td>   25.609</td> <td> 0.000</td> <td>    1.316</td> <td>    1.535</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>163.635</td> <th>  Durbin-Watson:     </th> <td>   1.980</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td>2869.374</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.875</td>  <th>  Prob(JB):          </th> <td>    0.00</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td>14.319</td>  <th>  Cond. No.          </th> <td>    1.23</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+</section>
+<section id="implementing-the-fama-french-three-factor-model-in-python">
+<h2>Implementing the Fama-French three-factor model in Python<a class="headerlink" href="#implementing-the-fama-french-three-factor-model-in-python" title="Permalink to this headline">#</a></h2>
+<p>Lewinson clearly summarizes the Fama and French three factor model:</p>
+<blockquote>
+<div><p>In their famous paper, Fama and French expanded the CAPM model by adding two additional factors explaining the excess returns of an asset or portfolio. The factors they considered are:</p>
+<ul class="simple">
+<li><p>The market factor (MKT): It measures the excess return of the market, analogical to the one in the CAPM.</p></li>
+<li><p>The size factor, SMB (Small Minus Big): It measures the excess return of stocks with a small market cap over those with a large market cap.</p></li>
+<li><p>The value factor, HML (High Minus Low): It measures the excess return of value stocks over growth stocks. Value stocks have a high book-to-market ratio, while the growth stocks are characterized by a low ratio.</p></li>
+</ul>
+<p>The model can be represented as follows: $<span class="math notranslate nohighlight">\(E(r_i) = r_f + \alpha + \beta_{mkt} (E(r_m) - r_f) + \beta_{SMB} SMB + \beta_{HML} HML\)</span>$</p>
+<p>Or in its simpler form: $<span class="math notranslate nohighlight">\(E(r_i) - r_f = \alpha + \beta_{mkt} (E(r_m) - r_f) + \beta_{SMB} SMB + \beta_{HML} HML\)</span>$</p>
+<p>Here, <span class="math notranslate nohighlight">\(E(r_i)\)</span> denotes the expected return on asset <span class="math notranslate nohighlight">\(i\)</span>, <span class="math notranslate nohighlight">\(r_f\)</span> is the risk-free rate (such as a government bond), and <span class="math notranslate nohighlight">\(\alpha\)</span> is the intercept. The reason for including the constant intercept is to make sure its value is equal to 0. This confirms that the three-factor model evaluates the relationship between the excess returns and the factors correctly.
+In the case of a statistically significant, non-zero intercept, the model might not evaluate the asset/portfolio return correctly. However, the authors stated that the three-factor model is “fairly correct”, even when it is unable to pass the statistical test.</p>
+<p>Due to the popularity of this approach, these factors became collectively known as the Fama-French Factors, or the Three-Factor Model. They have been widely accepted in both academia and the industry as stock market benchmarks and they are often used to evaluate investment performance.</p>
+</div></blockquote>
+<p>Lewinson uses new data to implement the Fama and French three-factor model, but we can use the same Amazon data from above to save ourselves some time and memory.
+As with CAPM estimations, we should estimate the three-factor model with one to three years of daily data.</p>
+<p>There are two common uses for the three-factor model:</p>
+<ol class="simple">
+<li><p>Use the coefficient estimate on the intercept (i.e., <span class="math notranslate nohighlight">\(\alpha\)</span>  often called “Jensen’s <span class="math notranslate nohighlight">\(\alpha\)</span>”) as a risk-adjusted performance measure. If <span class="math notranslate nohighlight">\(\alpha\)</span> is positive and statistically significant, we may attribute a fund manager’s performance to skill.</p></li>
+<li><p>Use the remaining coefficient estimates to evaluate how the fund manager generates returns. If the regression <span class="math notranslate nohighlight">\(R^2\)</span> is high, we may replace the fund manager with the factor itself.</p></li>
+</ol>
+<p>We can estimate the Fama-French three-factor model for AMZN, again.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s1">&#39;Ri ~ Rm + SMB + HML&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">amzn</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2020-09&#39;</span><span class="p">:])</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>           <td>Ri</td>        <th>  R-squared:         </th> <td>   0.645</td> 
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.643</td> 
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   315.5</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Wed, 16 Nov 2022</td> <th>  Prob (F-statistic):</th> <td>9.97e-117</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>16:10:39</td>     <th>  Log-Likelihood:    </th> <td> -921.82</td> 
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   525</td>      <th>  AIC:               </th> <td>   1852.</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   521</td>      <th>  BIC:               </th> <td>   1869.</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     3</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   -0.0190</td> <td>    0.062</td> <td>   -0.309</td> <td> 0.758</td> <td>   -0.140</td> <td>    0.102</td>
+</tr>
+<tr>
+  <th>Rm</th>        <td>    1.3104</td> <td>    0.056</td> <td>   23.502</td> <td> 0.000</td> <td>    1.201</td> <td>    1.420</td>
+</tr>
+<tr>
+  <th>SMB</th>       <td>   -0.4245</td> <td>    0.083</td> <td>   -5.128</td> <td> 0.000</td> <td>   -0.587</td> <td>   -0.262</td>
+</tr>
+<tr>
+  <th>HML</th>       <td>   -0.5425</td> <td>    0.052</td> <td>  -10.370</td> <td> 0.000</td> <td>   -0.645</td> <td>   -0.440</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>226.762</td> <th>  Durbin-Watson:     </th> <td>   2.063</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td>6125.967</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 1.285</td>  <th>  Prob(JB):          </th> <td>    0.00</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td>19.536</td>  <th>  Cond. No.          </th> <td>    2.05</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+<p>Above, the coefficient on the market risk premium (<code class="docutils literal notranslate"><span class="pre">Rm</span></code>) is greater than one, indicating that AMZN has greater than average systematic risk.
+The average stock has a market beta of one by construction.
+The coefficient on SMB (i.e., small-minus-big) is significantly negative, indicating that AMZN has a negative exposure to the small-stock risk factor because AMZN is a big stock (i.e., has a big market capitalization).
+Finally, the coefficient on HML is significantly negative, indicating that AMZN has a negative exposure to the value-stock risk factor because AMZN is a growth stock with high P/E (price/earnings) and low B/M (book-to-market equity ratio).</p>
+</section>
+<section id="implementing-the-rolling-three-factor-model-on-a-portfolio-of-assets">
+<h2>Implementing the rolling three-factor model on a portfolio of assets<a class="headerlink" href="#implementing-the-rolling-three-factor-model-on-a-portfolio-of-assets" title="Permalink to this headline">#</a></h2>
+<p>Lewinson manually estimates rolling three-factor regressions.
+However, statsmodels estimates rolling regressions out of the box!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.regression.rolling</span> <span class="kn">import</span> <span class="n">RollingOLS</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RollingOLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s1">&#39;Ri ~ Rm + SMB + HML&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">amzn</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">3</span><span class="o">*</span><span class="mi">252</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Intercept&#39;</span><span class="p">,</span> <span class="s1">&#39;Market Factor&#39;</span><span class="p">,</span> <span class="s1">&#39;Small Minus Big (SMB)&#39;</span><span class="p">,</span> <span class="s1">&#39;High Minus Low (HML)&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Coefficient Estimate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;AMZN: Rolling Three-Factor Models</span><span class="se">\n</span><span class="s1"> with Three Years of Daily Data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/lewinson-04_37_0.png" src="../_images/lewinson-04_37_0.png" />
+</div>
+</div>
+</section>
+<section id="implementing-the-four-and-five-factor-models-in-python">
+<h2>Implementing the four- and five-factor models in Python<a class="headerlink" href="#implementing-the-four-and-five-factor-models-in-python" title="Permalink to this headline">#</a></h2>
+<p>There are literally hundreds of published factors!
+However, many of them have little explanatory power (in or out of sample.
+Two more factor models that have explanatory power and economic intuition are the four- and five-factor models.
+The four-factor model is from Carhartt and the five-factor model is from Fama and French.</p>
+<blockquote>
+<div><p>In this recipe, we implement two extensions of the Fama-French three-factor model.</p>
+<p>Carhart’s Four-Factor model: The underlying assumption of this extension is that, within a short period of time, a winner stock will remain a winner, while a loser will remain a loser. An example of a criterion for classifying winners and losers could be the last 12-month cumulative total returns. After identifying the two groups, we long the winners and short the losers within a certain holding period.</p>
+<p>The momentum factor (WML; Winners Minus Losers) measures the excess returns of the winner stocks over the loser stocks in the past 12 months (please refer to the See also section of this recipe for references on the calculations of the momentum factor).</p>
+<p>The four-factor model can be expressed: $<span class="math notranslate nohighlight">\(E(r_i) - r_f = \alpha + \beta_{mkt}MKT + \beta_{smb}SMB + \beta_{HML}HML + \beta_{wml}WML\)</span>$</p>
+<p>Fama-French’s Five-Factor model: Fama and French expanded their three-factor model by adding two factors:</p>
+<ul class="simple">
+<li><p>Robust Minus Weak (RMW) measures the excess returns of companies with high profit margins (robust profitability) over those with lower profits (weak profitability).</p></li>
+<li><p>Conservative Minus Aggressive (CMA) measures the excess returns of firms with low investment policies (conservative) over those investing more (aggressive).</p></li>
+</ul>
+<p>The five-factor model can be expressed as follows: $<span class="math notranslate nohighlight">\(E(r_i) - r_f = \alpha + \beta_{mkt}MKT + \beta_{smb}SMB + \beta_{HML}HML + \beta_{rmw}RMW + \beta_{cma}CMA\)</span>$</p>
+<p>Like in all factor models, if the exposure to the risk factors captures all possible variations in expected returns, the intercept (α) for all the assets/portfolios should be equal to zero.</p>
+</div></blockquote>
+<p>We will explore the 4- and 5-factor models in the practice below.</p>
+</section>
+<section id="practice">
+<h2>Practice<a class="headerlink" href="#practice" title="Permalink to this headline">#</a></h2>
+<p><em><strong>Practice:</strong></em>
+Write a function <code class="docutils literal notranslate"><span class="pre">get_ff_data()</span></code> that accepts a list of tickers then:</p>
+<ol class="simple">
+<li><p>Downloads Yahoo! Finance data for these tickers</p></li>
+<li><p>Calculates returns for these tickers (returns in percent with the ticker as the column name)</p></li>
+<li><p>Downloads data for the Fama-French 3-, 4-, and 5-factor models</p></li>
+<li><p>Combines and returns these data (returns only returns and factors, where factors have their original names)</p></li>
+</ol>
+<p>This function will make it easier to estimate the 3-, 4- and 5- factor models!</p>
+<p>First we will write <code class="docutils literal notranslate"><span class="pre">get_ff_date()</span></code> to download data for one ticker and return the three factors (i.e., <code class="docutils literal notranslate"><span class="pre">Mkt-RF</span></code>, <code class="docutils literal notranslate"><span class="pre">SMB</span></code>, and ‘<code class="docutils literal notranslate"><span class="pre">HML</span></code>’).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pdr</span><span class="o">.</span><span class="n">famafrench</span><span class="o">.</span><span class="n">get_available_datasets</span><span class="p">()[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;F-F_Research_Data_Factors&#39;,
+ &#39;F-F_Research_Data_Factors_weekly&#39;,
+ &#39;F-F_Research_Data_Factors_daily&#39;,
+ &#39;F-F_Research_Data_5_Factors_2x3&#39;,
+ &#39;F-F_Research_Data_5_Factors_2x3_daily&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_ff_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">_stocks</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">_stocks</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">_stocks</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">_ff</span> <span class="o">=</span> <span class="n">pdr</span><span class="o">.</span><span class="n">get_data_famafrench</span><span class="p">(</span><span class="s1">&#39;F-F_Research_Data_5_Factors_2x3_daily&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="s1">&#39;1900&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">_stocks</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="p">):</span>
+        <span class="n">_returns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+            <span class="n">objs</span><span class="o">=</span><span class="p">[</span><span class="n">_stocks</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="mi">100</span><span class="p">)],</span> <span class="c1"># calculate returns</span>
+            <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Return&#39;</span><span class="p">],</span> <span class="c1"># add index level</span>
+            <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Variable&#39;</span><span class="p">,</span> <span class="s1">&#39;Ticker&#39;</span><span class="p">],</span> <span class="c1"># with names</span>
+            <span class="n">axis</span><span class="o">=</span><span class="mi">1</span> <span class="c1"># to columns</span>
+        <span class="p">)</span>
+
+        <span class="n">_ff</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+            <span class="n">objs</span><span class="o">=</span><span class="p">[</span><span class="n">_ff</span><span class="p">],</span> <span class="c1"># get Fama-French factors</span>
+            <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Return&#39;</span><span class="p">],</span> <span class="c1"># add index level</span>
+            <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Variable&#39;</span><span class="p">,</span> <span class="s1">&#39;Ticker&#39;</span><span class="p">],</span> <span class="c1"># with names</span>
+            <span class="n">axis</span><span class="o">=</span><span class="mi">1</span> <span class="c1"># to columns</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_stocks</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">_returns</span><span class="p">,</span> <span class="n">_ff</span><span class="p">])</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_stocks</span><span class="p">[</span><span class="s1">&#39;Return&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_stocks</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">_stocks</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_ff</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">get_ff_data()</span></code> and <code class="docutils literal notranslate"><span class="pre">smf.ols()</span></code> to quickly test is a manager has <span class="math notranslate nohighlight">\(\alpha\)</span> (or edge or ability or returns not explained ny risk factors).
+We can try with Berkshire Hathaway, which is Warren Buffett’s conglomerate.
+<em><strong>My error in class was using ticker <code class="docutils literal notranslate"><span class="pre">BRK-B</span></code>, whose time series Yahoo! Finance recently truncated.</strong></em>
+<em><strong>Instead, we will use <code class="docutils literal notranslate"><span class="pre">BRK-A</span></code>, which provides data back through 1980.</strong></em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">brk_a</span> <span class="o">=</span> <span class="n">get_ff_data</span><span class="p">(</span><span class="n">tickers</span><span class="o">=</span><span class="s1">&#39;BRK-A&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Buffett has an <span class="math notranslate nohighlight">\(\alpha\)</span> of <span class="math notranslate nohighlight">\(0.0415\%\)</span> per trading day, which annualizes to <span class="math notranslate nohighlight">\(252 \times 0.0415\% = 10.458\%\)</span> for a 43-year period!</p>
+<p>This <span class="math notranslate nohighlight">\(\alpha\)</span> nearly doubles if we look earlier in the sample, from 1980 to 1990.
+His <span class="math notranslate nohighlight">\(\alpha\)</span> of <span class="math notranslate nohighlight">\(0.0775\%\)</span> annualizes to <span class="math notranslate nohighlight">\(19.53\%\)</span> of return not explained by market risk!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s1">&#39;I(Return - RF) ~ Q(&quot;Mkt-RF&quot;)&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">brk_a</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="s1">&#39;1990&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>     <td>I(Return - RF)</td>  <th>  R-squared:         </th> <td>   0.129</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.129</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   403.5</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Wed, 16 Nov 2022</td> <th>  Prob (F-statistic):</th> <td>8.33e-84</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>16:10:41</td>     <th>  Log-Likelihood:    </th> <td> -4802.6</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>  2728</td>      <th>  AIC:               </th> <td>   9609.</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>  2726</td>      <th>  BIC:               </th> <td>   9621.</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+       <td></td>          <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>   <td>    0.0775</td> <td>    0.027</td> <td>    2.874</td> <td> 0.004</td> <td>    0.025</td> <td>    0.130</td>
+</tr>
+<tr>
+  <th>Q("Mkt-RF")</th> <td>    0.5633</td> <td>    0.028</td> <td>   20.087</td> <td> 0.000</td> <td>    0.508</td> <td>    0.618</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>394.590</td> <th>  Durbin-Watson:     </th> <td>   2.064</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td>5177.574</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.177</td>  <th>  Prob(JB):          </th> <td>    0.00</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 9.740</td>  <th>  Cond. No.          </th> <td>    1.05</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+<p><em><strong>Side bar:</strong></em> What about GameStop (GME)?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gme</span> <span class="o">=</span> <span class="n">get_ff_data</span><span class="p">(</span><span class="n">tickers</span><span class="o">=</span><span class="s1">&#39;GME&#39;</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  1 of 1 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s1">&#39;I(Return - RF) ~ Q(&quot;Mkt-RF&quot;) + SMB + HML&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">gme</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2020-12&#39;</span><span class="p">:])</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>     <td>I(Return - RF)</td>  <th>  R-squared:         </th> <td>   0.094</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.088</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   15.83</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Wed, 16 Nov 2022</td> <th>  Prob (F-statistic):</th> <td>8.29e-10</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>16:10:43</td>     <th>  Log-Likelihood:    </th> <td> -1831.0</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   462</td>      <th>  AIC:               </th> <td>   3670.</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   458</td>      <th>  BIC:               </th> <td>   3686.</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     3</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+       <td></td>          <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>   <td>    1.0693</td> <td>    0.597</td> <td>    1.792</td> <td> 0.074</td> <td>   -0.103</td> <td>    2.242</td>
+</tr>
+<tr>
+  <th>Q("Mkt-RF")</th> <td>    0.3770</td> <td>    0.556</td> <td>    0.678</td> <td> 0.498</td> <td>   -0.716</td> <td>    1.470</td>
+</tr>
+<tr>
+  <th>SMB</th>         <td>    5.1777</td> <td>    0.805</td> <td>    6.428</td> <td> 0.000</td> <td>    3.595</td> <td>    6.761</td>
+</tr>
+<tr>
+  <th>HML</th>         <td>   -0.0614</td> <td>    0.552</td> <td>   -0.111</td> <td> 0.911</td> <td>   -1.146</td> <td>    1.023</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>467.150</td> <th>  Durbin-Watson:     </th> <td>   1.748</td> 
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td>28340.167</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 4.294</td>  <th>  Prob(JB):          </th> <td>    0.00</td> 
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td>40.396</td>  <th>  Cond. No.          </th> <td>    2.05</td> 
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+<ul class="simple">
+<li><p>GME’s intercept or <span class="math notranslate nohighlight">\(\alpha\)</span> is positive (and almost statistically significant) because, despite its high volatility, the GME’s price is much higher today than in December 2020</p></li>
+<li><p>GME’s CAPM <span class="math notranslate nohighlight">\(\beta\)</span> is small and not statistically different zero because GME does not have market risk (and is mostly detached from fundamentals)</p></li>
+<li><p>GME’s SMB <span class="math notranslate nohighlight">\(\beta\)</span> is large, positive, and statistically significant because GME is a small stock</p></li>
+<li><p>GME’s HML <span class="math notranslate nohighlight">\(\beta\)</span> is moderate, positive, and (practically) statistically significant because GME <em>was</em> a value stock (i.e., high book-to-market equity ratio) before its price run up</p></li>
+</ul>
+<p>It may be help to look at GME’s price over the last two years.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gme</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2020-12&#39;</span><span class="p">:,</span> <span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;GameStop (GME) Price&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/lewinson-04_53_0.png" src="../_images/lewinson-04_53_0.png" />
+</div>
+</div>
+<p><em><strong>FOR HOMEWORK: Modify <code class="docutils literal notranslate"><span class="pre">get_ff_data()</span></code> to handle 2+ tickers.</strong></em>
+<em><strong>If you want to work ahead, further modify <code class="docutils literal notranslate"><span class="pre">get_ff_data()</span></code> to download the Fama-French momentum and five-factors.</strong></em></p>
+<p>See above; we did this one in class.</p>
+<p><em><strong>Practice:</strong></em>
+Estimate FF3 one-year rolling regressions for Warren Buffet’s Berkshire-Hathaway holding company (ticker BRK-A).
+What does the plot tell us about Warren Buffet’s skill as an asset manager?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RollingOLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span>
+    <span class="n">formula</span><span class="o">=</span><span class="s1">&#39;I(Return - RF) ~ Q(&quot;Mkt-RF&quot;) + SMB + HML&#39;</span><span class="p">,</span> 
+    <span class="n">data</span><span class="o">=</span><span class="n">brk_a</span><span class="p">,</span> 
+    <span class="n">window</span><span class="o">=</span><span class="mi">3</span><span class="o">*</span><span class="mi">252</span>
+<span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Intercept&#39;</span><span class="p">,</span> <span class="s1">&#39;Market Factor&#39;</span><span class="p">,</span> <span class="s1">&#39;Small Minus Big (SMB)&#39;</span><span class="p">,</span> <span class="s1">&#39;High Minus Low (HML)&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Coefficient Estimate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Berskhire Hathaway (BRK-A): Rolling Three-Factor Models</span><span class="se">\n</span><span class="s1"> with Three Years of Daily Data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/lewinson-04_56_0.png" src="../_images/lewinson-04_56_0.png" />
+</div>
+</div>
+<p><em><strong>Practice:</strong></em>
+Write a function <code class="docutils literal notranslate"><span class="pre">get_ff_fit()</span></code> that uses the data from <code class="docutils literal notranslate"><span class="pre">get_ff_data()</span></code> and estimates a CAPM or multifactor model.
+Use the following arguments:</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">formula=</span></code> accepts a valid formula (e.g., <code class="docutils literal notranslate"><span class="pre">formula='I(TSLA-RF)</span> <span class="pre">~</span> <span class="pre">Q(&quot;Mkt-RF&quot;)</span> <span class="pre">+</span> <span class="pre">SMB</span> <span class="pre">+</span> <span class="pre">HML'</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data=</span></code> accepts the data from <code class="docutils literal notranslate"><span class="pre">get_ff_data()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">start=</span></code> and <code class="docutils literal notranslate"><span class="pre">end=</span></code> are the beginning and ending dates for your analysis</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_ff_fit</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+    <span class="n">_model</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span>
+        <span class="n">formula</span><span class="o">=</span><span class="n">formula</span><span class="p">,</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fit</span> <span class="o">=</span> <span class="n">get_ff_fit</span><span class="p">(</span>
+    <span class="n">formula</span><span class="o">=</span><span class="s1">&#39;I(Return - RF) ~ Q(&quot;Mkt-RF&quot;) + SMB + HML&#39;</span><span class="p">,</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">brk_a</span><span class="p">,</span>
+    <span class="n">start</span><span class="o">=</span><span class="s1">&#39;1980&#39;</span><span class="p">,</span>
+    <span class="n">end</span><span class="o">=</span><span class="s1">&#39;1990&#39;</span>
+<span class="p">)</span>
+<span class="n">fit</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>     <td>I(Return - RF)</td>  <th>  R-squared:         </th> <td>   0.145</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.144</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   153.9</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Wed, 16 Nov 2022</td> <th>  Prob (F-statistic):</th> <td>3.96e-92</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>16:10:44</td>     <th>  Log-Likelihood:    </th> <td> -4777.3</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>  2728</td>      <th>  AIC:               </th> <td>   9563.</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>  2724</td>      <th>  BIC:               </th> <td>   9586.</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     3</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+       <td></td>          <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>   <td>    0.0711</td> <td>    0.027</td> <td>    2.652</td> <td> 0.008</td> <td>    0.019</td> <td>    0.124</td>
+</tr>
+<tr>
+  <th>Q("Mkt-RF")</th> <td>    0.7704</td> <td>    0.044</td> <td>   17.347</td> <td> 0.000</td> <td>    0.683</td> <td>    0.857</td>
+</tr>
+<tr>
+  <th>SMB</th>         <td>    0.4105</td> <td>    0.058</td> <td>    7.033</td> <td> 0.000</td> <td>    0.296</td> <td>    0.525</td>
+</tr>
+<tr>
+  <th>HML</th>         <td>    0.2805</td> <td>    0.087</td> <td>    3.233</td> <td> 0.001</td> <td>    0.110</td> <td>    0.451</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>432.197</td> <th>  Durbin-Watson:     </th> <td>   2.082</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td>5323.053</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.336</td>  <th>  Prob(JB):          </th> <td>    0.00</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 9.810</td>  <th>  Cond. No.          </th> <td>    3.79</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+<p><em><strong>Practice:</strong></em>
+Write a function <code class="docutils literal notranslate"><span class="pre">plot_betas()</span></code> that use the fit object from <code class="docutils literal notranslate"><span class="pre">get_ff_fit()</span></code> to plot a bar chart with coefficient estimates and standard errors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_betas</span><span class="p">(</span><span class="n">fit</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">_params</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">params</span>
+    <span class="k">if</span> <span class="n">labels</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">_params</span><span class="o">.</span><span class="n">index</span>
+    <span class="n">_serrs</span> <span class="o">=</span> <span class="n">_params</span> <span class="o">/</span> <span class="n">fit</span><span class="o">.</span><span class="n">tvalues</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="n">_params</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">_serrs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_betas</span><span class="p">(</span><span class="n">fit</span><span class="o">=</span><span class="n">fit</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Alpha&#39;</span><span class="p">,</span> <span class="s1">&#39;Market Beta&#39;</span><span class="p">,</span> <span class="s1">&#39;SMB Beta&#39;</span><span class="p">,</span> <span class="s1">&#39;HML Beta&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/lewinson-04_62_0.png" src="../_images/lewinson-04_62_0.png" />
+</div>
+</div>
+<p><em><strong>Practice:</strong></em>
+Estimate FF5 one-year rolling regressions for BRK-A.
+Do the additional factors explain Buffet’s performance?</p>
+<p>No, Buffett has alpha!
+I will plot only the intercept/alpha to declutter the plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RollingOLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span>
+    <span class="n">formula</span><span class="o">=</span><span class="s1">&#39;I(Return - RF) ~ Q(&quot;Mkt-RF&quot;) + SMB + HML + RMW + CMA&#39;</span><span class="p">,</span> 
+    <span class="n">data</span><span class="o">=</span><span class="n">brk_a</span><span class="p">,</span> 
+    <span class="n">window</span><span class="o">=</span><span class="mi">3</span><span class="o">*</span><span class="mi">252</span>
+<span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;Intercept&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="c1"># plt.legend([&#39;Intercept&#39;, &#39;Market Factor&#39;, &#39;Small Minus Big (SMB)&#39;, &#39;High Minus Low (HML)&#39;, &#39;Robust Minus Weak (RMW)&#39;, &#39;Conservative Minus Aggressive (CMA)&#39;])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Coefficient Estimate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Berskhire Hathaway (BRK-A): Rolling Five-Factor Models</span><span class="se">\n</span><span class="s1"> with Three Years of Daily Data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/lewinson-04_65_0.png" src="../_images/lewinson-04_65_0.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Lewinson"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="lewinson-02.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Lewinson Chapter 2 - Technical Analysis in Python</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="lewinson-06.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lewinson Chapter 6: Monte Carlo Simulations in Finance</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Richard Herron<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

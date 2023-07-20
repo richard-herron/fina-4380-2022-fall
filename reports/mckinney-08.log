@@ -1,0 +1,184 @@
+Traceback (most recent call last):
+  File "C:\Users\r.herron\Miniconda3\envs\fina-4380\lib\site-packages\jupyter_cache\executors\utils.py", line 51, in single_nb_execution
+    executenb(
+  File "C:\Users\r.herron\Miniconda3\envs\fina-4380\lib\site-packages\nbclient\client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "C:\Users\r.herron\Miniconda3\envs\fina-4380\lib\site-packages\nbclient\util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "C:\Users\r.herron\Miniconda3\envs\fina-4380\lib\site-packages\nbclient\util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "C:\Users\r.herron\Miniconda3\envs\fina-4380\lib\asyncio\base_events.py", line 646, in run_until_complete
+    return future.result()
+  File "C:\Users\r.herron\Miniconda3\envs\fina-4380\lib\site-packages\nbclient\client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "C:\Users\r.herron\Miniconda3\envs\fina-4380\lib\site-packages\nbclient\client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "C:\Users\r.herron\Miniconda3\envs\fina-4380\lib\site-packages\nbclient\client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+stocks_long_4 = stocks_long.join(ff)
+------------------
+
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mTypeError[0m                                 Traceback (most recent call last)
+Cell [1;32mIn [125], line 1[0m
+[1;32m----> 1[0m stocks_long_4 [38;5;241m=[39m stocks_long[38;5;241m.[39mjoin(ff)
+
+File [1;32m~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\frame.py:9969[0m, in [0;36mDataFrame.join[1;34m(self, other, on, how, lsuffix, rsuffix, sort, validate)[0m
+[0;32m   9806[0m [38;5;28;01mdef[39;00m [38;5;21mjoin[39m(
+[0;32m   9807[0m     [38;5;28mself[39m,
+[0;32m   9808[0m     other: DataFrame [38;5;241m|[39m Series [38;5;241m|[39m [38;5;28mlist[39m[DataFrame [38;5;241m|[39m Series],
+[1;32m   (...)[0m
+[0;32m   9814[0m     validate: [38;5;28mstr[39m [38;5;241m|[39m [38;5;28;01mNone[39;00m [38;5;241m=[39m [38;5;28;01mNone[39;00m,
+[0;32m   9815[0m ) [38;5;241m-[39m[38;5;241m>[39m DataFrame:
+[0;32m   9816[0m     [38;5;124;03m"""[39;00m
+[0;32m   9817[0m [38;5;124;03m    Join columns of another DataFrame.[39;00m
+[0;32m   9818[0m 
+[1;32m   (...)[0m
+[0;32m   9967[0m [38;5;124;03m    5  K1  A5   B1[39;00m
+[0;32m   9968[0m [38;5;124;03m    """[39;00m
+[1;32m-> 9969[0m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_join_compat[49m[43m([49m
+[0;32m   9970[0m [43m        [49m[43mother[49m[43m,[49m
+[0;32m   9971[0m [43m        [49m[43mon[49m[38;5;241;43m=[39;49m[43mon[49m[43m,[49m
+[0;32m   9972[0m [43m        [49m[43mhow[49m[38;5;241;43m=[39;49m[43mhow[49m[43m,[49m
+[0;32m   9973[0m [43m        [49m[43mlsuffix[49m[38;5;241;43m=[39;49m[43mlsuffix[49m[43m,[49m
+[0;32m   9974[0m [43m        [49m[43mrsuffix[49m[38;5;241;43m=[39;49m[43mrsuffix[49m[43m,[49m
+[0;32m   9975[0m [43m        [49m[43msort[49m[38;5;241;43m=[39;49m[43msort[49m[43m,[49m
+[0;32m   9976[0m [43m        [49m[43mvalidate[49m[38;5;241;43m=[39;49m[43mvalidate[49m[43m,[49m
+[0;32m   9977[0m [43m    [49m[43m)[49m
+
+File [1;32m~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\frame.py:10008[0m, in [0;36mDataFrame._join_compat[1;34m(self, other, on, how, lsuffix, rsuffix, sort, validate)[0m
+[0;32m   9998[0m     [38;5;28;01mif[39;00m how [38;5;241m==[39m [38;5;124m"[39m[38;5;124mcross[39m[38;5;124m"[39m:
+[0;32m   9999[0m         [38;5;28;01mreturn[39;00m merge(
+[0;32m  10000[0m             [38;5;28mself[39m,
+[0;32m  10001[0m             other,
+[1;32m   (...)[0m
+[0;32m  10006[0m             validate[38;5;241m=[39mvalidate,
+[0;32m  10007[0m         )
+[1;32m> 10008[0m     [38;5;28;01mreturn[39;00m [43mmerge[49m[43m([49m
+[0;32m  10009[0m [43m        [49m[38;5;28;43mself[39;49m[43m,[49m
+[0;32m  10010[0m [43m        [49m[43mother[49m[43m,[49m
+[0;32m  10011[0m [43m        [49m[43mleft_on[49m[38;5;241;43m=[39;49m[43mon[49m[43m,[49m
+[0;32m  10012[0m [43m        [49m[43mhow[49m[38;5;241;43m=[39;49m[43mhow[49m[43m,[49m
+[0;32m  10013[0m [43m        [49m[43mleft_index[49m[38;5;241;43m=[39;49m[43mon[49m[43m [49m[38;5;129;43;01mis[39;49;00m[43m [49m[38;5;28;43;01mNone[39;49;00m[43m,[49m
+[0;32m  10014[0m [43m        [49m[43mright_index[49m[38;5;241;43m=[39;49m[38;5;28;43;01mTrue[39;49;00m[43m,[49m
+[0;32m  10015[0m [43m        [49m[43msuffixes[49m[38;5;241;43m=[39;49m[43m([49m[43mlsuffix[49m[43m,[49m[43m [49m[43mrsuffix[49m[43m)[49m[43m,[49m
+[0;32m  10016[0m [43m        [49m[43msort[49m[38;5;241;43m=[39;49m[43msort[49m[43m,[49m
+[0;32m  10017[0m [43m        [49m[43mvalidate[49m[38;5;241;43m=[39;49m[43mvalidate[49m[43m,[49m
+[0;32m  10018[0m [43m    [49m[43m)[49m
+[0;32m  10019[0m [38;5;28;01melse[39;00m:
+[0;32m  10020[0m     [38;5;28;01mif[39;00m on [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
+
+File [1;32m~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\reshape\merge.py:125[0m, in [0;36mmerge[1;34m(left, right, how, on, left_on, right_on, left_index, right_index, sort, suffixes, copy, indicator, validate)[0m
+[0;32m     94[0m [38;5;129m@Substitution[39m([38;5;124m"[39m[38;5;130;01m\n[39;00m[38;5;124mleft : DataFrame or named Series[39m[38;5;124m"[39m)
+[0;32m     95[0m [38;5;129m@Appender[39m(_merge_doc, indents[38;5;241m=[39m[38;5;241m0[39m)
+[0;32m     96[0m [38;5;28;01mdef[39;00m [38;5;21mmerge[39m(
+[1;32m   (...)[0m
+[0;32m    109[0m     validate: [38;5;28mstr[39m [38;5;241m|[39m [38;5;28;01mNone[39;00m [38;5;241m=[39m [38;5;28;01mNone[39;00m,
+[0;32m    110[0m ) [38;5;241m-[39m[38;5;241m>[39m DataFrame:
+[0;32m    111[0m     op [38;5;241m=[39m _MergeOperation(
+[0;32m    112[0m         left,
+[0;32m    113[0m         right,
+[1;32m   (...)[0m
+[0;32m    123[0m         validate[38;5;241m=[39mvalidate,
+[0;32m    124[0m     )
+[1;32m--> 125[0m     [38;5;28;01mreturn[39;00m [43mop[49m[38;5;241;43m.[39;49m[43mget_result[49m[43m([49m[43mcopy[49m[38;5;241;43m=[39;49m[43mcopy[49m[43m)[49m
+
+File [1;32m~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\reshape\merge.py:776[0m, in [0;36m_MergeOperation.get_result[1;34m(self, copy)[0m
+[0;32m    773[0m [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39mindicator:
+[0;32m    774[0m     [38;5;28mself[39m[38;5;241m.[39mleft, [38;5;28mself[39m[38;5;241m.[39mright [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39m_indicator_pre_merge([38;5;28mself[39m[38;5;241m.[39mleft, [38;5;28mself[39m[38;5;241m.[39mright)
+[1;32m--> 776[0m join_index, left_indexer, right_indexer [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_get_join_info[49m[43m([49m[43m)[49m
+[0;32m    778[0m result [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39m_reindex_and_concat(
+[0;32m    779[0m     join_index, left_indexer, right_indexer, copy[38;5;241m=[39mcopy
+[0;32m    780[0m )
+[0;32m    781[0m result [38;5;241m=[39m result[38;5;241m.[39m__finalize__([38;5;28mself[39m, method[38;5;241m=[39m[38;5;28mself[39m[38;5;241m.[39m_merge_type)
+
+File [1;32m~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\reshape\merge.py:1015[0m, in [0;36m_MergeOperation._get_join_info[1;34m(self)[0m
+[0;32m   1012[0m right_ax [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39mright[38;5;241m.[39maxes[[38;5;28mself[39m[38;5;241m.[39maxis]
+[0;32m   1014[0m [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39mleft_index [38;5;129;01mand[39;00m [38;5;28mself[39m[38;5;241m.[39mright_index [38;5;129;01mand[39;00m [38;5;28mself[39m[38;5;241m.[39mhow [38;5;241m!=[39m [38;5;124m"[39m[38;5;124masof[39m[38;5;124m"[39m:
+[1;32m-> 1015[0m     join_index, left_indexer, right_indexer [38;5;241m=[39m [43mleft_ax[49m[38;5;241;43m.[39;49m[43mjoin[49m[43m([49m
+[0;32m   1016[0m [43m        [49m[43mright_ax[49m[43m,[49m[43m [49m[43mhow[49m[38;5;241;43m=[39;49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mhow[49m[43m,[49m[43m [49m[43mreturn_indexers[49m[38;5;241;43m=[39;49m[38;5;28;43;01mTrue[39;49;00m[43m,[49m[43m [49m[43msort[49m[38;5;241;43m=[39;49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43msort[49m
+[0;32m   1017[0m [43m    [49m[43m)[49m
+[0;32m   1019[0m [38;5;28;01melif[39;00m [38;5;28mself[39m[38;5;241m.[39mright_index [38;5;129;01mand[39;00m [38;5;28mself[39m[38;5;241m.[39mhow [38;5;241m==[39m [38;5;124m"[39m[38;5;124mleft[39m[38;5;124m"[39m:
+[0;32m   1020[0m     join_index, left_indexer, right_indexer [38;5;241m=[39m _left_join_on_index(
+[0;32m   1021[0m         left_ax, right_ax, [38;5;28mself[39m[38;5;241m.[39mleft_join_keys, sort[38;5;241m=[39m[38;5;28mself[39m[38;5;241m.[39msort
+[0;32m   1022[0m     )
+
+File [1;32m~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\util\_decorators.py:317[0m, in [0;36mdeprecate_nonkeyword_arguments.<locals>.decorate.<locals>.wrapper[1;34m(*args, **kwargs)[0m
+[0;32m    311[0m [38;5;28;01mif[39;00m [38;5;28mlen[39m(args) [38;5;241m>[39m num_allow_args:
+[0;32m    312[0m     warnings[38;5;241m.[39mwarn(
+[0;32m    313[0m         msg[38;5;241m.[39mformat(arguments[38;5;241m=[39marguments),
+[0;32m    314[0m         [38;5;167;01mFutureWarning[39;00m,
+[0;32m    315[0m         stacklevel[38;5;241m=[39mfind_stack_level(inspect[38;5;241m.[39mcurrentframe()),
+[0;32m    316[0m     )
+[1;32m--> 317[0m [38;5;28;01mreturn[39;00m func([38;5;241m*[39margs, [38;5;241m*[39m[38;5;241m*[39mkwargs)
+
+File [1;32m~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\indexes\base.py:230[0m, in [0;36m_maybe_return_indexers.<locals>.join[1;34m(self, other, how, level, return_indexers, sort)[0m
+[0;32m    221[0m [38;5;129m@functools[39m[38;5;241m.[39mwraps(meth)
+[0;32m    222[0m [38;5;28;01mdef[39;00m [38;5;21mjoin[39m(
+[0;32m    223[0m     [38;5;28mself[39m,
+[1;32m   (...)[0m
+[0;32m    228[0m     sort: [38;5;28mbool[39m [38;5;241m=[39m [38;5;28;01mFalse[39;00m,
+[0;32m    229[0m ):
+[1;32m--> 230[0m     join_index, lidx, ridx [38;5;241m=[39m [43mmeth[49m[43m([49m[38;5;28;43mself[39;49m[43m,[49m[43m [49m[43mother[49m[43m,[49m[43m [49m[43mhow[49m[38;5;241;43m=[39;49m[43mhow[49m[43m,[49m[43m [49m[43mlevel[49m[38;5;241;43m=[39;49m[43mlevel[49m[43m,[49m[43m [49m[43msort[49m[38;5;241;43m=[39;49m[43msort[49m[43m)[49m
+[0;32m    231[0m     [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m return_indexers:
+[0;32m    232[0m         [38;5;28;01mreturn[39;00m join_index
+
+File [1;32m~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\indexes\base.py:4655[0m, in [0;36mIndex.join[1;34m(self, other, how, level, return_indexers, sort)[0m
+[0;32m   4653[0m         [38;5;28;01mpass[39;00m
+[0;32m   4654[0m     [38;5;28;01melse[39;00m:
+[1;32m-> 4655[0m         [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_join_multi[49m[43m([49m[43mother[49m[43m,[49m[43m [49m[43mhow[49m[38;5;241;43m=[39;49m[43mhow[49m[43m)[49m
+[0;32m   4657[0m [38;5;66;03m# join on the level[39;00m
+[0;32m   4658[0m [38;5;28;01mif[39;00m level [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m [38;5;129;01mand[39;00m ([38;5;28mself[39m[38;5;241m.[39m_is_multi [38;5;129;01mor[39;00m other[38;5;241m.[39m_is_multi):
+
+File [1;32m~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\indexes\base.py:4837[0m, in [0;36mIndex._join_multi[1;34m(self, other, how)[0m
+[0;32m   4834[0m     how [38;5;241m=[39m {[38;5;124m"[39m[38;5;124mright[39m[38;5;124m"[39m: [38;5;124m"[39m[38;5;124mleft[39m[38;5;124m"[39m, [38;5;124m"[39m[38;5;124mleft[39m[38;5;124m"[39m: [38;5;124m"[39m[38;5;124mright[39m[38;5;124m"[39m}[38;5;241m.[39mget(how, how)
+[0;32m   4836[0m level [38;5;241m=[39m other[38;5;241m.[39mnames[38;5;241m.[39mindex(jl)
+[1;32m-> 4837[0m result [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_join_level[49m[43m([49m[43mother[49m[43m,[49m[43m [49m[43mlevel[49m[43m,[49m[43m [49m[43mhow[49m[38;5;241;43m=[39;49m[43mhow[49m[43m)[49m
+[0;32m   4839[0m [38;5;28;01mif[39;00m flip_order:
+[0;32m   4840[0m     [38;5;28;01mreturn[39;00m result[[38;5;241m0[39m], result[[38;5;241m2[39m], result[[38;5;241m1[39m]
+
+File [1;32m~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\indexes\base.py:4940[0m, in [0;36mIndex._join_level[1;34m(self, other, level, how, keep_order)[0m
+[0;32m   4935[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m right[38;5;241m.[39mis_unique:
+[0;32m   4936[0m     [38;5;28;01mraise[39;00m [38;5;167;01mNotImplementedError[39;00m(
+[0;32m   4937[0m         [38;5;124m"[39m[38;5;124mIndex._join_level on non-unique index is not implemented[39m[38;5;124m"[39m
+[0;32m   4938[0m     )
+[1;32m-> 4940[0m new_level, left_lev_indexer, right_lev_indexer [38;5;241m=[39m [43mold_level[49m[38;5;241;43m.[39;49m[43mjoin[49m[43m([49m
+[0;32m   4941[0m [43m    [49m[43mright[49m[43m,[49m[43m [49m[43mhow[49m[38;5;241;43m=[39;49m[43mhow[49m[43m,[49m[43m [49m[43mreturn_indexers[49m[38;5;241;43m=[39;49m[38;5;28;43;01mTrue[39;49;00m
+[0;32m   4942[0m [43m[49m[43m)[49m
+[0;32m   4944[0m [38;5;28;01mif[39;00m left_lev_indexer [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+[0;32m   4945[0m     [38;5;28;01mif[39;00m keep_order [38;5;129;01mor[39;00m [38;5;28mlen[39m(left) [38;5;241m==[39m [38;5;241m0[39m:
+
+File [1;32m~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\util\_decorators.py:317[0m, in [0;36mdeprecate_nonkeyword_arguments.<locals>.decorate.<locals>.wrapper[1;34m(*args, **kwargs)[0m
+[0;32m    311[0m [38;5;28;01mif[39;00m [38;5;28mlen[39m(args) [38;5;241m>[39m num_allow_args:
+[0;32m    312[0m     warnings[38;5;241m.[39mwarn(
+[0;32m    313[0m         msg[38;5;241m.[39mformat(arguments[38;5;241m=[39marguments),
+[0;32m    314[0m         [38;5;167;01mFutureWarning[39;00m,
+[0;32m    315[0m         stacklevel[38;5;241m=[39mfind_stack_level(inspect[38;5;241m.[39mcurrentframe()),
+[0;32m    316[0m     )
+[1;32m--> 317[0m [38;5;28;01mreturn[39;00m func([38;5;241m*[39margs, [38;5;241m*[39m[38;5;241m*[39mkwargs)
+
+File [1;32m~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\indexes\base.py:230[0m, in [0;36m_maybe_return_indexers.<locals>.join[1;34m(self, other, how, level, return_indexers, sort)[0m
+[0;32m    221[0m [38;5;129m@functools[39m[38;5;241m.[39mwraps(meth)
+[0;32m    222[0m [38;5;28;01mdef[39;00m [38;5;21mjoin[39m(
+[0;32m    223[0m     [38;5;28mself[39m,
+[1;32m   (...)[0m
+[0;32m    228[0m     sort: [38;5;28mbool[39m [38;5;241m=[39m [38;5;28;01mFalse[39;00m,
+[0;32m    229[0m ):
+[1;32m--> 230[0m     join_index, lidx, ridx [38;5;241m=[39m [43mmeth[49m[43m([49m[38;5;28;43mself[39;49m[43m,[49m[43m [49m[43mother[49m[43m,[49m[43m [49m[43mhow[49m[38;5;241;43m=[39;49m[43mhow[49m[43m,[49m[43m [49m[43mlevel[49m[38;5;241;43m=[39;49m[43mlevel[49m[43m,[49m[43m [49m[43msort[49m[38;5;241;43m=[39;49m[43msort[49m[43m)[49m
+[0;32m    231[0m     [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m return_indexers:
+[0;32m    232[0m         [38;5;28;01mreturn[39;00m join_index
+
+File [1;32m~\Miniconda3\envs\fina-4380\lib\site-packages\pandas\core\indexes\base.py:4634[0m, in [0;36mIndex.join[1;34m(self, other, how, level, return_indexers, sort)[0m
+[0;32m   4631[0m [38;5;28;01mif[39;00m [38;5;28misinstance[39m([38;5;28mself[39m, ABCDatetimeIndex) [38;5;129;01mand[39;00m [38;5;28misinstance[39m(other, ABCDatetimeIndex):
+[0;32m   4632[0m     [38;5;28;01mif[39;00m ([38;5;28mself[39m[38;5;241m.[39mtz [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m) [38;5;241m^[39m (other[38;5;241m.[39mtz [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m):
+[0;32m   4633[0m         [38;5;66;03m# Raise instead of casting to object below.[39;00m
+[1;32m-> 4634[0m         [38;5;28;01mraise[39;00m [38;5;167;01mTypeError[39;00m([38;5;124m"[39m[38;5;124mCannot join tz-naive with tz-aware DatetimeIndex[39m[38;5;124m"[39m)
+[0;32m   4636[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m [38;5;28mself[39m[38;5;241m.[39m_is_multi [38;5;129;01mand[39;00m [38;5;129;01mnot[39;00m other[38;5;241m.[39m_is_multi:
+[0;32m   4637[0m     [38;5;66;03m# We have specific handling for MultiIndex below[39;00m
+[0;32m   4638[0m     pself, pother [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39m_maybe_promote(other)
+
+[1;31mTypeError[0m: Cannot join tz-naive with tz-aware DatetimeIndex
+TypeError: Cannot join tz-naive with tz-aware DatetimeIndex
+

@@ -1,0 +1,1995 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Calculate daily returns for the S&amp;P 100 stocks. &#8212; FINA 4380 for Fall 2022</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../_static/DMSB_100th_LogoMark_CMYK_Horiz.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">FINA 4380 for Fall 2022</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../introduction.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  McKinney
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../McKinney/mckinney-02.html">
+   McKinney Chapter 2 - Python Language Basics, IPython, and Jupyter Notebooks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../McKinney/mckinney-03.html">
+   McKinney Chapter 3 - Built-in Data Structures, Functions, and Files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../McKinney/mckinney-04.html">
+   McKinney Chapter 4 - NumPy Basics: Arrays and Vectorized Computation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../McKinney/mckinney-05.html">
+   McKinney Chapter 5 - Getting Started with pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../McKinney/mckinney-08.html">
+   McKinney Chapter 8 - Data Wrangling: Join, Combine, and Reshape
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../McKinney/mckinney-10.html">
+   McKinney Chapter 10 - Data Aggregation and Group Operations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../McKinney/mckinney-11.html">
+   McKinney Chapter 11 - Time Series
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lewinson
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../Lewinson/lewinson-01.html">
+   Lewinson Chapter 1 - Financial Data and Preprocessing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../Lewinson/lewinson-02.html">
+   Lewinson Chapter 2 - Technical Analysis in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../Lewinson/lewinson-04.html">
+   Lewinson Chapter 4 - Multi-Factor Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../Lewinson/lewinson-06.html">
+   Lewinson Chapter 6: Monte Carlo Simulations in Finance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../Lewinson/lewinson-07.html">
+   Lewinson Chapter 7 - Asset Allocation in Python
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Herron
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../Herron/herron-lookups.html">
+   Herron - Lookups
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../Herron/herron-downloading-data.html">
+   Herron - Downloading Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../Herron/herron-do-market-prices-respond.html">
+   Herron - Do market prices respond to new information?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../Herron/herron-momentum.html">
+   Herron - Does momentum investing work?
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Projects
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../project-1-template.html">
+   Calculate daily returns for the S&amp;P 100 stocks.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../project-2/project-2-template.html">
+   Consider only 1999 through today
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../project-2/project-2-tips.html">
+   Consider only 1999 through today
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/richardcherron/fina-4380-2022-fall/main?urlpath=lab/tree/Notebooks/Projects/project-1/submissions/project1_12773_17644176_Project 1.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/richardcherron/fina-4380-2022-fall/blob/main/Notebooks/Projects/project-1/submissions/project1_12773_17644176_Project 1.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/richardcherron/fina-4380-2022-fall"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/richardcherron/fina-4380-2022-fall/issues/new?title=Issue%20on%20page%20%2FProjects/project-1/submissions/project1_12773_17644176_Project 1.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../../_sources/Projects/project-1/submissions/project1_12773_17644176_Project 1.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Calculate daily returns for the S&amp;P 100 stocks.
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-well-do-annualized-average-returns-in-2020-predict-those-in-2021">
+   How well do annualized average returns in 2020 predict those in 2021?
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#annualized-average-returns-in-2020-are-a-poor-predictor-of-annualized-average-returns-in-2021-a-correlation-also-referred-to-as-r-of-0-0197-was-found-under-0-25-is-considered-a-weak-relationship">
+     Annualized average returns in 2020 are a poor predictor of annualized average returns in 2021. A correlation (also referred to as “r”) of -0.0197 was found. Under 0.25 is considered a weak relationship.
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-well-do-annualized-standard-deviations-of-returns-in-2020-predict-those-in-2021">
+   How well do annualized standard deviations of returns in 2020 predict those in 2021?
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#annualized-standard-deviations-of-returns-in-2020-are-a-good-predictor-of-those-in-2021-they-had-a-correlation-of-0-8190-over-0-75-is-considered-a-strong-relationship-because-2020-returns-don-t-predict-2021-returns-well-but-2020-s-standard-deviations-do-we-can-conclude-we-couldn-t-have-predicted-how-these-stocks-prices-would-move-in-2021-based-on-2020-s-prices-but-we-could-know-that-regardless-of-how-2021-prices-moved-they-were-going-to-have-similar-volatilities">
+     Annualized standard deviations of returns in 2020 are a good predictor of those in 2021. They had a correlation of 0.8190. Over 0.75 is considered a strong relationship. Because 2020 returns don’t predict 2021 returns well but 2020’s standard deviations do, we can conclude we couldn’t have predicted how these stocks’ prices would move in 2021 based on 2020’s prices, but we could know that regardless of how 2021 prices moved, they were going to have similar volatilities.
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-are-the-mean-median-minimum-and-maximum-pairwise-correlations-between-two-stocks">
+   What are the mean, median, minimum, and maximum pairwise correlations between two stocks?
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mean-correlation-0-4775">
+     Mean Correlation: 0.4775
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#median-correlation-0-4798">
+     Median Correlation: 0.4798
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#minimum-correlation-0-0601">
+     Minimum Correlation: 0.0601
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#maximum-correlation-for-2-different-stocks-0-99377">
+     Maximum Correlation for 2 different stocks: 0.99377
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-annualized-average-returns-versus-annualized-standard-deviations-of-returns">
+   Plot annualized average returns versus annualized standard deviations of returns.
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#repeat-the-exercise-above-question-5-with-100-random-portfolios-of-2-5-10-and-25-stocks">
+   Repeat the exercise above (question 5) with 100 random portfolios of 2, 5, 10, and 25 stocks.
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Calculate daily returns for the S&P 100 stocks.</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Calculate daily returns for the S&amp;P 100 stocks.
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-well-do-annualized-average-returns-in-2020-predict-those-in-2021">
+   How well do annualized average returns in 2020 predict those in 2021?
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#annualized-average-returns-in-2020-are-a-poor-predictor-of-annualized-average-returns-in-2021-a-correlation-also-referred-to-as-r-of-0-0197-was-found-under-0-25-is-considered-a-weak-relationship">
+     Annualized average returns in 2020 are a poor predictor of annualized average returns in 2021. A correlation (also referred to as “r”) of -0.0197 was found. Under 0.25 is considered a weak relationship.
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-well-do-annualized-standard-deviations-of-returns-in-2020-predict-those-in-2021">
+   How well do annualized standard deviations of returns in 2020 predict those in 2021?
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#annualized-standard-deviations-of-returns-in-2020-are-a-good-predictor-of-those-in-2021-they-had-a-correlation-of-0-8190-over-0-75-is-considered-a-strong-relationship-because-2020-returns-don-t-predict-2021-returns-well-but-2020-s-standard-deviations-do-we-can-conclude-we-couldn-t-have-predicted-how-these-stocks-prices-would-move-in-2021-based-on-2020-s-prices-but-we-could-know-that-regardless-of-how-2021-prices-moved-they-were-going-to-have-similar-volatilities">
+     Annualized standard deviations of returns in 2020 are a good predictor of those in 2021. They had a correlation of 0.8190. Over 0.75 is considered a strong relationship. Because 2020 returns don’t predict 2021 returns well but 2020’s standard deviations do, we can conclude we couldn’t have predicted how these stocks’ prices would move in 2021 based on 2020’s prices, but we could know that regardless of how 2021 prices moved, they were going to have similar volatilities.
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-are-the-mean-median-minimum-and-maximum-pairwise-correlations-between-two-stocks">
+   What are the mean, median, minimum, and maximum pairwise correlations between two stocks?
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mean-correlation-0-4775">
+     Mean Correlation: 0.4775
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#median-correlation-0-4798">
+     Median Correlation: 0.4798
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#minimum-correlation-0-0601">
+     Minimum Correlation: 0.0601
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#maximum-correlation-for-2-different-stocks-0-99377">
+     Maximum Correlation for 2 different stocks: 0.99377
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-annualized-average-returns-versus-annualized-standard-deviations-of-returns">
+   Plot annualized average returns versus annualized standard deviations of returns.
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#repeat-the-exercise-above-question-5-with-100-random-portfolios-of-2-5-10-and-25-stocks">
+   Repeat the exercise above (question 5) with 100 random portfolios of 2, 5, 10, and 25 stocks.
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.float_format&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+<span class="o">%</span><span class="k">precision</span> 4
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">150</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
+<span class="kn">import</span> <span class="nn">requests_cache</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">requests_cache</span><span class="o">.</span><span class="n">CachedSession</span><span class="p">(</span><span class="n">expire_after</span><span class="o">=</span><span class="s1">&#39;1D&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tickers_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="s1">&#39;ABBV&#39;</span><span class="p">,</span> <span class="s1">&#39;ABT&#39;</span><span class="p">,</span> <span class="s1">&#39;ACN&#39;</span><span class="p">,</span> <span class="s1">&#39;ADBE&#39;</span><span class="p">,</span> <span class="s1">&#39;AIG&#39;</span><span class="p">,</span> <span class="s1">&#39;AMD&#39;</span><span class="p">,</span> <span class="s1">&#39;AMGN&#39;</span><span class="p">,</span> <span class="s1">&#39;AMT&#39;</span><span class="p">,</span> <span class="s1">&#39;AMZN&#39;</span><span class="p">,</span> <span class="s1">&#39;AVGO&#39;</span><span class="p">,</span> <span class="s1">&#39;AXP&#39;</span><span class="p">,</span> <span class="s1">&#39;BA&#39;</span><span class="p">,</span> <span class="s1">&#39;BAC&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;BK&#39;</span><span class="p">,</span> <span class="s1">&#39;BKNG&#39;</span><span class="p">,</span> <span class="s1">&#39;BLK&#39;</span><span class="p">,</span> <span class="s1">&#39;BMY&#39;</span><span class="p">,</span> <span class="s1">&#39;BRK&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;CAT&#39;</span><span class="p">,</span> <span class="s1">&#39;CHTR&#39;</span><span class="p">,</span> <span class="s1">&#39;CL&#39;</span><span class="p">,</span> <span class="s1">&#39;CMCSA&#39;</span><span class="p">,</span> <span class="s1">&#39;COF&#39;</span><span class="p">,</span> <span class="s1">&#39;COP&#39;</span><span class="p">,</span> <span class="s1">&#39;COST&#39;</span><span class="p">,</span> <span class="s1">&#39;CRM&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;CSCO&#39;</span><span class="p">,</span> <span class="s1">&#39;CVS&#39;</span><span class="p">,</span> <span class="s1">&#39;CVX&#39;</span><span class="p">,</span> <span class="s1">&#39;DHR&#39;</span><span class="p">,</span> <span class="s1">&#39;DIS&#39;</span><span class="p">,</span> <span class="s1">&#39;DOW&#39;</span><span class="p">,</span> <span class="s1">&#39;DUK&#39;</span><span class="p">,</span> <span class="s1">&#39;EMR&#39;</span><span class="p">,</span> <span class="s1">&#39;EXC&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;FDX&#39;</span><span class="p">,</span> <span class="s1">&#39;GD&#39;</span><span class="p">,</span> <span class="s1">&#39;GE&#39;</span><span class="p">,</span> <span class="s1">&#39;GILD&#39;</span><span class="p">,</span> <span class="s1">&#39;GM&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;GOOG&#39;</span><span class="p">,</span> <span class="s1">&#39;GOOGL&#39;</span><span class="p">,</span> <span class="s1">&#39;GS&#39;</span><span class="p">,</span> <span class="s1">&#39;HD&#39;</span><span class="p">,</span> <span class="s1">&#39;HON&#39;</span><span class="p">,</span> <span class="s1">&#39;IBM&#39;</span><span class="p">,</span> <span class="s1">&#39;INTC&#39;</span><span class="p">,</span> <span class="s1">&#39;JNJ&#39;</span><span class="p">,</span> <span class="s1">&#39;JPM&#39;</span><span class="p">,</span> <span class="s1">&#39;KHC&#39;</span><span class="p">,</span> <span class="s1">&#39;KO&#39;</span><span class="p">,</span> <span class="s1">&#39;LIN&#39;</span><span class="p">,</span> <span class="s1">&#39;LLY&#39;</span><span class="p">,</span> <span class="s1">&#39;LMT&#39;</span><span class="p">,</span> <span class="s1">&#39;LOW&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;MA&#39;</span><span class="p">,</span> <span class="s1">&#39;MCD&#39;</span><span class="p">,</span> <span class="s1">&#39;MDLZ&#39;</span><span class="p">,</span> <span class="s1">&#39;MDT&#39;</span><span class="p">,</span> <span class="s1">&#39;MET&#39;</span><span class="p">,</span> <span class="s1">&#39;META&#39;</span><span class="p">,</span> <span class="s1">&#39;MMM&#39;</span><span class="p">,</span> <span class="s1">&#39;META&#39;</span><span class="p">,</span> <span class="s1">&#39;MMM&#39;</span><span class="p">,</span> <span class="s1">&#39;MO&#39;</span><span class="p">,</span> <span class="s1">&#39;MRK&#39;</span><span class="p">,</span> <span class="s1">&#39;MS&#39;</span><span class="p">,</span> <span class="s1">&#39;MSFT&#39;</span><span class="p">,</span> <span class="s1">&#39;NEE&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;NFLX&#39;</span><span class="p">,</span> <span class="s1">&#39;NKE&#39;</span><span class="p">,</span> <span class="s1">&#39;NVDA&#39;</span><span class="p">,</span> <span class="s1">&#39;ORCL&#39;</span><span class="p">,</span> <span class="s1">&#39;PEP&#39;</span><span class="p">,</span> <span class="s1">&#39;PFE&#39;</span><span class="p">,</span> <span class="s1">&#39;PG&#39;</span><span class="p">,</span> <span class="s1">&#39;PM&#39;</span><span class="p">,</span> <span class="s1">&#39;PYPL&#39;</span><span class="p">,</span> <span class="s1">&#39;QCOM&#39;</span><span class="p">,</span> <span class="s1">&#39;RTX&#39;</span><span class="p">,</span> <span class="s1">&#39;SBUX&#39;</span><span class="p">,</span> <span class="s1">&#39;SCHW&#39;</span><span class="p">,</span> <span class="s1">&#39;SO&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;SPG&#39;</span><span class="p">,</span> <span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;TGT&#39;</span><span class="p">,</span> <span class="s1">&#39;TMO&#39;</span><span class="p">,</span> <span class="s1">&#39;TMUS&#39;</span><span class="p">,</span> <span class="s1">&#39;TSLA&#39;</span><span class="p">,</span> <span class="s1">&#39;TXN&#39;</span><span class="p">,</span> <span class="s1">&#39;UNH&#39;</span><span class="p">,</span> <span class="s1">&#39;UNP&#39;</span><span class="p">,</span> <span class="s1">&#39;UPS&#39;</span><span class="p">,</span> <span class="s1">&#39;USB&#39;</span><span class="p">,</span> <span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;VZ&#39;</span><span class="p">,</span> <span class="s1">&#39;WBA&#39;</span><span class="p">,</span> <span class="s1">&#39;WFC&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;WMT&#39;</span><span class="p">,</span> <span class="s1">&#39;XOM&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="c1"># this function is wrapper around yf.download and add returns to it</span>
+    <span class="n">stocks</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">returns</span> <span class="o">=</span> <span class="n">stocks</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
+    <span class="n">multi_index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_product</span><span class="p">([[</span><span class="s1">&#39;Returns&#39;</span><span class="p">],</span> <span class="n">stocks</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">columns</span><span class="p">])</span>
+    <span class="n">stocks</span><span class="p">[</span><span class="n">multi_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">returns</span>
+    <span class="n">stocks</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Variable&#39;</span><span class="p">,</span> <span class="s1">&#39;Ticker&#39;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">stocks</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stocks</span> <span class="o">=</span> <span class="n">download</span><span class="p">(</span><span class="n">tickers</span> <span class="o">=</span> <span class="n">tickers_list</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[                       0%                       ]
+[                       0%                       ]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*                      3%                       ]  3 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**                     4%                       ]  4 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**                     5%                       ]  5 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[***                    6%                       ]  6 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[***                    7%                       ]  7 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[****                   8%                       ]  8 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[****                   9%                       ]  9 of 101 completed
+[****                   9%                       ]  9 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*****                 11%                       ]  11 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[******                12%                       ]  12 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[******                13%                       ]  13 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*******               14%                       ]  14 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*******               15%                       ]  15 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[********              16%                       ]  16 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[********              17%                       ]  17 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********             18%                       ]  18 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********             19%                       ]  19 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********            20%                       ]  20 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********            21%                       ]  21 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[***********           22%                       ]  22 of 101 completed
+[***********           22%                       ]  22 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[************          24%                       ]  24 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[************          25%                       ]  25 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[************          26%                       ]  26 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*************         27%                       ]  27 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*************         28%                       ]  28 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**************        29%                       ]  29 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**************        30%                       ]  30 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[***************       31%                       ]  31 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[***************       32%                       ]  32 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[****************      33%                       ]  33 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[****************      34%                       ]  34 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*****************     35%                       ]  35 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*****************     36%                       ]  36 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[******************    37%                       ]  37 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[******************    38%                       ]  38 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*******************   39%                       ]  39 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*******************   40%                       ]  40 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[********************  41%                       ]  41 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[********************  42%                       ]  42 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[********************* 43%                       ]  43 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[********************* 44%                       ]  44 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************45%                       ]  45 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************46%                       ]  46 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************47%                       ]  47 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************48%                       ]  48 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************49%                       ]  49 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************50%                       ]  50 of 101 completed
+[**********************50%                       ]  50 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************51%                       ]  52 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************52%                       ]  53 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************53%                       ]  54 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************54%*                      ]  55 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************55%*                      ]  56 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************56%**                     ]  57 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************57%**                     ]  58 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************58%***                    ]  59 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************59%***                    ]  60 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************59%***                    ]  60 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************61%****                   ]  62 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************62%*****                  ]  63 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************63%*****                  ]  64 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************64%******                 ]  65 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************65%******                 ]  66 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************66%*******                ]  67 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************67%*******                ]  68 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************68%********               ]  69 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************69%********               ]  70 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************70%*********              ]  71 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************71%*********              ]  72 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************72%**********             ]  73 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************73%**********             ]  74 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************74%***********            ]  75 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************75%***********            ]  76 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************76%***********            ]  77 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************77%************           ]  78 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************78%************           ]  79 of 101 completed
+[**********************78%************           ]  79 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************80%*************          ]  81 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************81%**************         ]  82 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************82%**************         ]  83 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************83%***************        ]  84 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************84%***************        ]  85 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************85%****************       ]  86 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************86%****************       ]  87 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************87%*****************      ]  88 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************88%*****************      ]  89 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************89%******************     ]  90 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************90%******************     ]  91 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************91%*******************    ]  92 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************92%*******************    ]  93 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************93%********************   ]  94 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************94%********************   ]  95 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************95%*********************  ]  96 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************96%*********************  ]  97 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************97%********************** ]  98 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************98%********************** ]  99 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[**********************99%***********************]  100 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[*********************100%***********************]  101 of 101 completed
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7488/511497442.py:6: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  stocks[multi_index] = returns
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="calculate-daily-returns-for-the-s-p-100-stocks">
+<h1>Calculate daily returns for the S&amp;P 100 stocks.<a class="headerlink" href="#calculate-daily-returns-for-the-s-p-100-stocks" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">returns</span> <span class="o">=</span> <span class="n">stocks</span><span class="p">[</span><span class="s1">&#39;Adj Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span> <span class="c1"># daily returns</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">returns_2020</span> <span class="o">=</span> <span class="n">returns</span><span class="p">[</span><span class="s1">&#39;2019-08-01&#39;</span><span class="p">:</span><span class="s1">&#39;2020-08-01&#39;</span><span class="p">]</span>
+<span class="n">returns_2021</span> <span class="o">=</span> <span class="n">returns</span><span class="p">[</span><span class="s1">&#39;2020-08-01&#39;</span><span class="p">:</span><span class="s1">&#39;2021-08-01&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Daily returns for 2020 fiscal year</span>
+<span class="n">returns_2020</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Ticker</th>
+      <th>AAPL</th>
+      <th>ABBV</th>
+      <th>ABT</th>
+      <th>ACN</th>
+      <th>ADBE</th>
+      <th>AIG</th>
+      <th>AMD</th>
+      <th>AMGN</th>
+      <th>AMT</th>
+      <th>AMZN</th>
+      <th>...</th>
+      <th>UNH</th>
+      <th>UNP</th>
+      <th>UPS</th>
+      <th>USB</th>
+      <th>V</th>
+      <th>VZ</th>
+      <th>WBA</th>
+      <th>WFC</th>
+      <th>WMT</th>
+      <th>XOM</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2019-08-01</th>
+      <td>-0.0216</td>
+      <td>-0.0123</td>
+      <td>-0.0117</td>
+      <td>0.0082</td>
+      <td>-0.0014</td>
+      <td>-0.0229</td>
+      <td>-0.0194</td>
+      <td>-0.0031</td>
+      <td>-0.0010</td>
+      <td>-0.0061</td>
+      <td>...</td>
+      <td>0.0010</td>
+      <td>-0.0275</td>
+      <td>-0.0208</td>
+      <td>-0.0255</td>
+      <td>0.0066</td>
+      <td>-0.0002</td>
+      <td>-0.0077</td>
+      <td>-0.0279</td>
+      <td>-0.0091</td>
+      <td>-0.0256</td>
+    </tr>
+    <tr>
+      <th>2019-08-02</th>
+      <td>-0.0212</td>
+      <td>-0.0068</td>
+      <td>-0.0030</td>
+      <td>-0.0059</td>
+      <td>-0.0158</td>
+      <td>-0.0069</td>
+      <td>-0.0141</td>
+      <td>0.0066</td>
+      <td>0.0192</td>
+      <td>-0.0173</td>
+      <td>...</td>
+      <td>0.0032</td>
+      <td>-0.0085</td>
+      <td>0.0019</td>
+      <td>-0.0047</td>
+      <td>-0.0098</td>
+      <td>0.0060</td>
+      <td>-0.0072</td>
+      <td>0.0081</td>
+      <td>0.0002</td>
+      <td>-0.0098</td>
+    </tr>
+    <tr>
+      <th>2019-08-05</th>
+      <td>-0.0523</td>
+      <td>-0.0018</td>
+      <td>-0.0310</td>
+      <td>-0.0387</td>
+      <td>-0.0455</td>
+      <td>-0.0280</td>
+      <td>-0.0493</td>
+      <td>-0.0306</td>
+      <td>-0.0073</td>
+      <td>-0.0319</td>
+      <td>...</td>
+      <td>-0.0200</td>
+      <td>-0.0385</td>
+      <td>-0.0201</td>
+      <td>-0.0429</td>
+      <td>-0.0482</td>
+      <td>-0.0067</td>
+      <td>-0.0337</td>
+      <td>-0.0274</td>
+      <td>-0.0327</td>
+      <td>-0.0205</td>
+    </tr>
+    <tr>
+      <th>2019-08-06</th>
+      <td>0.0189</td>
+      <td>-0.0071</td>
+      <td>0.0204</td>
+      <td>0.0176</td>
+      <td>0.0209</td>
+      <td>0.0297</td>
+      <td>0.0311</td>
+      <td>0.0163</td>
+      <td>0.0143</td>
+      <td>0.0129</td>
+      <td>...</td>
+      <td>0.0131</td>
+      <td>0.0089</td>
+      <td>0.0013</td>
+      <td>0.0096</td>
+      <td>0.0214</td>
+      <td>-0.0031</td>
+      <td>-0.0081</td>
+      <td>0.0171</td>
+      <td>0.0137</td>
+      <td>0.0097</td>
+    </tr>
+    <tr>
+      <th>2019-08-07</th>
+      <td>0.0104</td>
+      <td>-0.0048</td>
+      <td>-0.0031</td>
+      <td>0.0003</td>
+      <td>0.0098</td>
+      <td>0.0006</td>
+      <td>0.0114</td>
+      <td>-0.0050</td>
+      <td>0.0022</td>
+      <td>0.0031</td>
+      <td>...</td>
+      <td>-0.0074</td>
+      <td>-0.0084</td>
+      <td>0.0036</td>
+      <td>-0.0177</td>
+      <td>0.0165</td>
+      <td>0.0007</td>
+      <td>0.0200</td>
+      <td>-0.0239</td>
+      <td>0.0087</td>
+      <td>-0.0065</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2020-07-27</th>
+      <td>0.0237</td>
+      <td>0.0005</td>
+      <td>0.0105</td>
+      <td>0.0085</td>
+      <td>0.0158</td>
+      <td>-0.0147</td>
+      <td>-0.0062</td>
+      <td>0.0229</td>
+      <td>0.0155</td>
+      <td>0.0154</td>
+      <td>...</td>
+      <td>-0.0073</td>
+      <td>0.0040</td>
+      <td>0.0225</td>
+      <td>-0.0206</td>
+      <td>0.0090</td>
+      <td>0.0004</td>
+      <td>-0.0165</td>
+      <td>-0.0293</td>
+      <td>-0.0002</td>
+      <td>0.0147</td>
+    </tr>
+    <tr>
+      <th>2020-07-28</th>
+      <td>-0.0164</td>
+      <td>-0.0046</td>
+      <td>-0.0013</td>
+      <td>-0.0051</td>
+      <td>-0.0111</td>
+      <td>0.0032</td>
+      <td>-0.0197</td>
+      <td>0.0064</td>
+      <td>0.0249</td>
+      <td>-0.0180</td>
+      <td>...</td>
+      <td>0.0045</td>
+      <td>-0.0136</td>
+      <td>-0.0115</td>
+      <td>0.0044</td>
+      <td>-0.0009</td>
+      <td>0.0107</td>
+      <td>0.0211</td>
+      <td>0.0016</td>
+      <td>0.0042</td>
+      <td>-0.0118</td>
+    </tr>
+    <tr>
+      <th>2020-07-29</th>
+      <td>0.0192</td>
+      <td>0.0031</td>
+      <td>0.0266</td>
+      <td>0.0099</td>
+      <td>0.0093</td>
+      <td>0.0556</td>
+      <td>0.1254</td>
+      <td>-0.0251</td>
+      <td>0.0168</td>
+      <td>0.0111</td>
+      <td>...</td>
+      <td>0.0225</td>
+      <td>0.0205</td>
+      <td>0.0339</td>
+      <td>0.0383</td>
+      <td>0.0094</td>
+      <td>-0.0005</td>
+      <td>0.0118</td>
+      <td>0.0098</td>
+      <td>-0.0081</td>
+      <td>0.0110</td>
+    </tr>
+    <tr>
+      <th>2020-07-30</th>
+      <td>0.0121</td>
+      <td>-0.0100</td>
+      <td>-0.0097</td>
+      <td>-0.0018</td>
+      <td>0.0059</td>
+      <td>-0.0272</td>
+      <td>0.0277</td>
+      <td>-0.0109</td>
+      <td>-0.0324</td>
+      <td>0.0060</td>
+      <td>...</td>
+      <td>-0.0047</td>
+      <td>-0.0291</td>
+      <td>0.1438</td>
+      <td>-0.0212</td>
+      <td>-0.0228</td>
+      <td>-0.0026</td>
+      <td>-0.0126</td>
+      <td>-0.0438</td>
+      <td>-0.0044</td>
+      <td>-0.0491</td>
+    </tr>
+    <tr>
+      <th>2020-07-31</th>
+      <td>0.1047</td>
+      <td>-0.0118</td>
+      <td>-0.0088</td>
+      <td>0.0036</td>
+      <td>0.0124</td>
+      <td>0.0113</td>
+      <td>-0.0098</td>
+      <td>-0.0060</td>
+      <td>-0.0042</td>
+      <td>0.0370</td>
+      <td>...</td>
+      <td>-0.0080</td>
+      <td>0.0032</td>
+      <td>0.0092</td>
+      <td>-0.0019</td>
+      <td>-0.0189</td>
+      <td>0.0031</td>
+      <td>0.0017</td>
+      <td>-0.0158</td>
+      <td>-0.0055</td>
+      <td>0.0050</td>
+    </tr>
+  </tbody>
+</table>
+<p>253 rows × 101 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Daily returns for 2021 fiscal year</span>
+<span class="n">returns_2021</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Ticker</th>
+      <th>AAPL</th>
+      <th>ABBV</th>
+      <th>ABT</th>
+      <th>ACN</th>
+      <th>ADBE</th>
+      <th>AIG</th>
+      <th>AMD</th>
+      <th>AMGN</th>
+      <th>AMT</th>
+      <th>AMZN</th>
+      <th>...</th>
+      <th>UNH</th>
+      <th>UNP</th>
+      <th>UPS</th>
+      <th>USB</th>
+      <th>V</th>
+      <th>VZ</th>
+      <th>WBA</th>
+      <th>WFC</th>
+      <th>WMT</th>
+      <th>XOM</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2020-08-03</th>
+      <td>0.0252</td>
+      <td>0.0109</td>
+      <td>0.0004</td>
+      <td>0.0107</td>
+      <td>0.0082</td>
+      <td>0.0000</td>
+      <td>0.0031</td>
+      <td>0.0110</td>
+      <td>-0.0184</td>
+      <td>-0.0167</td>
+      <td>...</td>
+      <td>0.0027</td>
+      <td>-0.0074</td>
+      <td>-0.0041</td>
+      <td>-0.0011</td>
+      <td>0.0015</td>
+      <td>-0.0042</td>
+      <td>0.0091</td>
+      <td>0.0012</td>
+      <td>-0.0008</td>
+      <td>0.0040</td>
+    </tr>
+    <tr>
+      <th>2020-08-04</th>
+      <td>0.0067</td>
+      <td>-0.0172</td>
+      <td>-0.0074</td>
+      <td>-0.0001</td>
+      <td>-0.0023</td>
+      <td>-0.0753</td>
+      <td>0.0949</td>
+      <td>-0.0152</td>
+      <td>0.0140</td>
+      <td>0.0087</td>
+      <td>...</td>
+      <td>0.0029</td>
+      <td>0.0094</td>
+      <td>0.0179</td>
+      <td>-0.0155</td>
+      <td>0.0084</td>
+      <td>0.0117</td>
+      <td>-0.0037</td>
+      <td>-0.0029</td>
+      <td>0.0181</td>
+      <td>0.0289</td>
+    </tr>
+    <tr>
+      <th>2020-08-05</th>
+      <td>0.0036</td>
+      <td>-0.0110</td>
+      <td>0.0221</td>
+      <td>0.0068</td>
+      <td>0.0058</td>
+      <td>0.0155</td>
+      <td>0.0032</td>
+      <td>-0.0087</td>
+      <td>-0.0188</td>
+      <td>0.0211</td>
+      <td>...</td>
+      <td>0.0262</td>
+      <td>0.0218</td>
+      <td>0.0025</td>
+      <td>0.0174</td>
+      <td>0.0198</td>
+      <td>-0.0064</td>
+      <td>-0.0029</td>
+      <td>0.0074</td>
+      <td>-0.0139</td>
+      <td>0.0087</td>
+    </tr>
+    <tr>
+      <th>2020-08-06</th>
+      <td>0.0349</td>
+      <td>-0.0073</td>
+      <td>-0.0038</td>
+      <td>0.0096</td>
+      <td>0.0325</td>
+      <td>-0.0285</td>
+      <td>0.0164</td>
+      <td>0.0003</td>
+      <td>0.0009</td>
+      <td>0.0062</td>
+      <td>...</td>
+      <td>0.0051</td>
+      <td>0.0121</td>
+      <td>0.0027</td>
+      <td>-0.0019</td>
+      <td>0.0136</td>
+      <td>0.0050</td>
+      <td>0.0020</td>
+      <td>-0.0025</td>
+      <td>-0.0035</td>
+      <td>-0.0048</td>
+    </tr>
+    <tr>
+      <th>2020-08-07</th>
+      <td>-0.0227</td>
+      <td>0.0038</td>
+      <td>-0.0051</td>
+      <td>0.0029</td>
+      <td>-0.0313</td>
+      <td>0.0457</td>
+      <td>-0.0215</td>
+      <td>-0.0036</td>
+      <td>0.0082</td>
+      <td>-0.0178</td>
+      <td>...</td>
+      <td>0.0095</td>
+      <td>0.0185</td>
+      <td>0.0786</td>
+      <td>0.0182</td>
+      <td>-0.0121</td>
+      <td>0.0121</td>
+      <td>0.0154</td>
+      <td>0.0342</td>
+      <td>0.0048</td>
+      <td>-0.0046</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2021-07-26</th>
+      <td>0.0029</td>
+      <td>-0.0034</td>
+      <td>-0.0106</td>
+      <td>0.0010</td>
+      <td>-0.0081</td>
+      <td>0.0085</td>
+      <td>-0.0036</td>
+      <td>-0.0107</td>
+      <td>-0.0023</td>
+      <td>0.0118</td>
+      <td>...</td>
+      <td>-0.0100</td>
+      <td>0.0002</td>
+      <td>-0.0084</td>
+      <td>0.0083</td>
+      <td>0.0049</td>
+      <td>-0.0018</td>
+      <td>0.0155</td>
+      <td>0.0094</td>
+      <td>0.0014</td>
+      <td>0.0252</td>
+    </tr>
+    <tr>
+      <th>2021-07-27</th>
+      <td>-0.0149</td>
+      <td>0.0014</td>
+      <td>0.0024</td>
+      <td>0.0029</td>
+      <td>-0.0041</td>
+      <td>-0.0061</td>
+      <td>-0.0086</td>
+      <td>-0.0016</td>
+      <td>0.0080</td>
+      <td>-0.0198</td>
+      <td>...</td>
+      <td>0.0038</td>
+      <td>-0.0098</td>
+      <td>-0.0699</td>
+      <td>-0.0005</td>
+      <td>0.0027</td>
+      <td>0.0075</td>
+      <td>-0.0091</td>
+      <td>0.0029</td>
+      <td>0.0001</td>
+      <td>-0.0111</td>
+    </tr>
+    <tr>
+      <th>2021-07-28</th>
+      <td>-0.0122</td>
+      <td>0.0050</td>
+      <td>0.0059</td>
+      <td>-0.0112</td>
+      <td>0.0043</td>
+      <td>-0.0099</td>
+      <td>0.0758</td>
+      <td>-0.0018</td>
+      <td>-0.0066</td>
+      <td>0.0011</td>
+      <td>...</td>
+      <td>-0.0143</td>
+      <td>-0.0067</td>
+      <td>-0.0161</td>
+      <td>-0.0020</td>
+      <td>-0.0159</td>
+      <td>-0.0085</td>
+      <td>0.0062</td>
+      <td>0.0082</td>
+      <td>-0.0041</td>
+      <td>0.0067</td>
+    </tr>
+    <tr>
+      <th>2021-07-29</th>
+      <td>0.0046</td>
+      <td>0.0027</td>
+      <td>0.0047</td>
+      <td>0.0064</td>
+      <td>0.0013</td>
+      <td>0.0196</td>
+      <td>0.0513</td>
+      <td>-0.0073</td>
+      <td>-0.0069</td>
+      <td>-0.0084</td>
+      <td>...</td>
+      <td>0.0071</td>
+      <td>0.0035</td>
+      <td>-0.0012</td>
+      <td>0.0071</td>
+      <td>0.0040</td>
+      <td>0.0047</td>
+      <td>-0.0015</td>
+      <td>0.0218</td>
+      <td>0.0013</td>
+      <td>0.0122</td>
+    </tr>
+    <tr>
+      <th>2021-07-30</th>
+      <td>0.0015</td>
+      <td>-0.0216</td>
+      <td>-0.0009</td>
+      <td>-0.0021</td>
+      <td>-0.0001</td>
+      <td>-0.0109</td>
+      <td>0.0315</td>
+      <td>-0.0038</td>
+      <td>-0.0007</td>
+      <td>-0.0756</td>
+      <td>...</td>
+      <td>0.0003</td>
+      <td>0.0066</td>
+      <td>-0.0023</td>
+      <td>-0.0159</td>
+      <td>-0.0062</td>
+      <td>-0.0036</td>
+      <td>0.0023</td>
+      <td>-0.0120</td>
+      <td>0.0022</td>
+      <td>-0.0231</td>
+    </tr>
+  </tbody>
+</table>
+<p>251 rows × 101 columns</p>
+</div></div></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="how-well-do-annualized-average-returns-in-2020-predict-those-in-2021">
+<h1>How well do annualized average returns in 2020 predict those in 2021?<a class="headerlink" href="#how-well-do-annualized-average-returns-in-2020-predict-those-in-2021" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># annualized average returns in 2020</span>
+<span class="n">returns_2020_annum</span> <span class="o">=</span> <span class="n">returns_2020</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="mi">252</span><span class="p">)</span>
+<span class="c1"># annualized average returns in 2021</span>
+<span class="n">returns_2021_annum</span> <span class="o">=</span> <span class="n">returns_2021</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="mi">252</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># correlation between all stocks&#39; 2020 and 2021 fiscal year returns</span>
+<span class="n">returns_2020_annum</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">returns_2021_annum</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.0203
+</pre></div>
+</div>
+</div>
+</div>
+<section id="annualized-average-returns-in-2020-are-a-poor-predictor-of-annualized-average-returns-in-2021-a-correlation-also-referred-to-as-r-of-0-0197-was-found-under-0-25-is-considered-a-weak-relationship">
+<h2>Annualized average returns in 2020 are a poor predictor of annualized average returns in 2021. A correlation (also referred to as “r”) of -0.0197 was found. Under 0.25 is considered a weak relationship.<a class="headerlink" href="#annualized-average-returns-in-2020-are-a-poor-predictor-of-annualized-average-returns-in-2021-a-correlation-also-referred-to-as-r-of-0-0197-was-found-under-0-25-is-considered-a-weak-relationship" title="Permalink to this headline">#</a></h2>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="how-well-do-annualized-standard-deviations-of-returns-in-2020-predict-those-in-2021">
+<h1>How well do annualized standard deviations of returns in 2020 predict those in 2021?<a class="headerlink" href="#how-well-do-annualized-standard-deviations-of-returns-in-2020-predict-those-in-2021" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stdev_2020</span> <span class="o">=</span> <span class="n">returns_2020</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">252</span><span class="p">))</span>
+<span class="n">stdev_2021</span> <span class="o">=</span> <span class="n">returns_2021</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">252</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># correlation between the standard deviations all stocks&#39; 2020 and 2021 fiscal year returns </span>
+<span class="n">stdev_2020</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">stdev_2021</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8190
+</pre></div>
+</div>
+</div>
+</div>
+<section id="annualized-standard-deviations-of-returns-in-2020-are-a-good-predictor-of-those-in-2021-they-had-a-correlation-of-0-8190-over-0-75-is-considered-a-strong-relationship-because-2020-returns-don-t-predict-2021-returns-well-but-2020-s-standard-deviations-do-we-can-conclude-we-couldn-t-have-predicted-how-these-stocks-prices-would-move-in-2021-based-on-2020-s-prices-but-we-could-know-that-regardless-of-how-2021-prices-moved-they-were-going-to-have-similar-volatilities">
+<h2>Annualized standard deviations of returns in 2020 are a good predictor of those in 2021. They had a correlation of 0.8190. Over 0.75 is considered a strong relationship. Because 2020 returns don’t predict 2021 returns well but 2020’s standard deviations do, we can conclude we couldn’t have predicted how these stocks’ prices would move in 2021 based on 2020’s prices, but we could know that regardless of how 2021 prices moved, they were going to have similar volatilities.<a class="headerlink" href="#annualized-standard-deviations-of-returns-in-2020-are-a-good-predictor-of-those-in-2021-they-had-a-correlation-of-0-8190-over-0-75-is-considered-a-strong-relationship-because-2020-returns-don-t-predict-2021-returns-well-but-2020-s-standard-deviations-do-we-can-conclude-we-couldn-t-have-predicted-how-these-stocks-prices-would-move-in-2021-based-on-2020-s-prices-but-we-could-know-that-regardless-of-how-2021-prices-moved-they-were-going-to-have-similar-volatilities" title="Permalink to this headline">#</a></h2>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="what-are-the-mean-median-minimum-and-maximum-pairwise-correlations-between-two-stocks">
+<h1>What are the mean, median, minimum, and maximum pairwise correlations between two stocks?<a class="headerlink" href="#what-are-the-mean-median-minimum-and-maximum-pairwise-correlations-between-two-stocks" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">returns_both_yrs</span> <span class="o">=</span> <span class="n">returns</span><span class="p">[</span><span class="s1">&#39;2020-01-02&#39;</span><span class="p">:</span><span class="s1">&#39;2022-08-31&#39;</span><span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr</span> <span class="o">=</span> <span class="n">returns_both_yrs</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_corr</span> <span class="o">=</span> <span class="n">corr</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">median_corr</span> <span class="o">=</span> <span class="n">corr</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="n">min_corr</span> <span class="o">=</span> <span class="n">corr</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="n">max_corrs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">corr</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">corrs</span> <span class="o">=</span> <span class="n">corr</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+    <span class="n">max_corrs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">corrs</span><span class="p">[</span><span class="n">corrs</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="n">max_corr</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_corrs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_corr</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4775
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">median_corr</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4798
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_corr</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0601
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">max_corr</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9937
+</pre></div>
+</div>
+</div>
+</div>
+<section id="mean-correlation-0-4775">
+<h2>Mean Correlation: 0.4775<a class="headerlink" href="#mean-correlation-0-4775" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="median-correlation-0-4798">
+<h2>Median Correlation: 0.4798<a class="headerlink" href="#median-correlation-0-4798" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="minimum-correlation-0-0601">
+<h2>Minimum Correlation: 0.0601<a class="headerlink" href="#minimum-correlation-0-0601" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="maximum-correlation-for-2-different-stocks-0-99377">
+<h2>Maximum Correlation for 2 different stocks: 0.99377<a class="headerlink" href="#maximum-correlation-for-2-different-stocks-0-99377" title="Permalink to this headline">#</a></h2>
+<p>The smallest pairwise correlation between 2 stocks was between Verizon (VZ) and Tesla (TSLA), with a correlation of 0.0601. This is because these two companies are in industries that are viewed very differently by market participant, telecommunications and autonomous vehicle manufacturing, respectively. A telecomm firm like Verizon is a value stocks; it has existed for decades and has very slow growth rates, which means its stock has very low price and returns volatility relative to growth stocks like Tesla. Tesla’s stock has much greater and more rapid price swings, which give it a high volatility and explain why its returns move nothing alike those of Verizon.</p>
+<p>The closest correlation, 0.9937, is between the tickers GOOGL and GOOG, which makes sense as both these stocks are from the same parent company, Alphabet. GOOGL are Alpabet’s Class A shares while GOOG are its Class C shares. Class A shares trade at a slight premium to Class C shares since they have voting rights while Class C shares don’t. However, although their prices are usually different, the prices move almost identically, which explains a correlation of nearly 1.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="plot-annualized-average-returns-versus-annualized-standard-deviations-of-returns">
+<h1>Plot annualized average returns versus annualized standard deviations of returns.<a class="headerlink" href="#plot-annualized-average-returns-versus-annualized-standard-deviations-of-returns" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">avg_returns</span> <span class="o">=</span> <span class="n">returns_both_yrs</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="mi">252</span><span class="p">)</span>
+<span class="n">stdev_returns</span> <span class="o">=</span> <span class="n">returns_both_yrs</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">252</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">stdev_returns</span><span class="p">,</span> <span class="n">avg_returns</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Annualized Average Returns Vs. Annualized Standard Deviation of Returns&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Annualized Standard Deviation of Returns&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Annualized Average Returns&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.7</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">0.6</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/project1_12773_17644176_Project 1_31_0.png" src="../../../_images/project1_12773_17644176_Project 1_31_0.png" />
+</div>
+</div>
+<p>There were two outliers on this graph, Berkshire Hathaway (BRK) and Tesla (TSLA). Both are not shown in order to give a closer up graph of the rest of the data points. Berkshire Hathaway had a return and standard deviation of 0 because data could not be pulled for it. The other outlier is Tesla, which had a return of 1.1249 over this period. Many factors are behind this growth. During the beginning of the COVID-19 pandemic in 2020, Tesla was one of just a few large cap public companies that was thriving because of fast growing sales, maintaining substantial liquidity, and finally turning profitable. While most stocks’ prices crashed in 2020 and took around a year to return to pre-pandemic levels, Tesla’s share price shot up a few hundred percent. It became one of the most popular stocks for retail investors to buy. Even more, due to Tesla’s commitment to sustainability initiatives, it gained a better ESG classification, which led to massive increases in the number of ETFs it was listed on, from 106 in July 2018 to 244 by December 2021.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="repeat-the-exercise-above-question-5-with-100-random-portfolios-of-2-5-10-and-25-stocks">
+<h1>Repeat the exercise above (question 5) with 100 random portfolios of 2, 5, 10, and 25 stocks.<a class="headerlink" href="#repeat-the-exercise-above-question-5-with-100-random-portfolios-of-2-5-10-and-25-stocks" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">sample</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">]:</span>
+    <span class="n">avg_returns</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">stdev_returns</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+        <span class="n">random_tickers</span> <span class="o">=</span> <span class="n">sample</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">tickers_list</span><span class="p">),</span> <span class="n">n</span><span class="p">)</span>
+        <span class="n">avg_return</span> <span class="o">=</span> <span class="n">returns_both_yrs</span><span class="p">[</span><span class="n">random_tickers</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="mi">252</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">stdev_return</span> <span class="o">=</span> <span class="n">returns_both_yrs</span><span class="p">[</span><span class="n">random_tickers</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">252</span><span class="p">))</span>
+       
+        <span class="n">avg_returns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">avg_return</span><span class="p">)</span>
+        <span class="n">stdev_returns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stdev_return</span><span class="p">)</span>
+        <span class="n">std_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">stdev_returns</span><span class="p">))</span>
+        <span class="n">average_std</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">std_array</span><span class="p">:</span>
+            <span class="n">sum_of_squares</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span>
+                <span class="n">sum_of_squares</span> <span class="o">+=</span> <span class="n">i</span><span class="o">**</span><span class="mi">2</span>
+            <span class="n">divide</span> <span class="o">=</span> <span class="n">sum_of_squares</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">std_array</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">sqrt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">divide</span><span class="p">)</span>
+            <span class="n">average_std</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sqrt</span><span class="p">)</span>
+        
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">average_std</span><span class="p">,</span> <span class="n">avg_returns</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Annualized Average Returns Vs. Standard Deviation of Returns for </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1">-Stock Portfolios&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Annualized Standard Deviation of Returns&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Annualized Returns&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mf">.15</span><span class="p">,</span><span class="mf">.4</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">.1</span><span class="p">,</span><span class="mf">.35</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/project1_12773_17644176_Project 1_35_0.png" src="../../../_images/project1_12773_17644176_Project 1_35_0.png" />
+<img alt="../../../_images/project1_12773_17644176_Project 1_35_1.png" src="../../../_images/project1_12773_17644176_Project 1_35_1.png" />
+<img alt="../../../_images/project1_12773_17644176_Project 1_35_2.png" src="../../../_images/project1_12773_17644176_Project 1_35_2.png" />
+<img alt="../../../_images/project1_12773_17644176_Project 1_35_3.png" src="../../../_images/project1_12773_17644176_Project 1_35_3.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">returns</span><span class="p">[</span><span class="s1">&#39;BRK&#39;</span><span class="p">][</span><span class="n">returns</span><span class="p">[</span><span class="s1">&#39;BRK&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Date
+1996-08-13   0.0000
+1996-08-15   0.0000
+1996-08-21   0.0000
+1996-08-26   0.0000
+1996-08-29   0.0000
+              ...  
+2022-10-21   0.0000
+2022-10-24   0.0000
+2022-10-25   0.0000
+2022-10-26   0.0000
+2022-10-27   0.0000
+Name: BRK, Length: 2643, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Observing the graphs above, it’s clear that portfolios holding more stocks from an index (in this case the S&amp;P 100) have more predictable performances. The first graph, showing returns versus standard deviations for 100 random 2-stock portfolios, is very scattered. If we were to plot the data for a 101st portfolio on this graph, we wouldn’t be able to estimate what it’s annualized returns and standard deviations might be with a high degree of certainty. However, if we plotted a 101st 25-stock portfolio on the fourth graph, we could assume it’s return would most likely be between 11% and 17%, and it would have a standard deviation of about 27% to 30%. We would be confident in our prediction because those are the ranges the vast majority of the 100 random portfolios on the graph are clustered in.</p>
+<p>Furthermore, portfolios containing a larger number of stocks in an index will mimic that index’s behavior more closely, so we can also conclude that the annualized returns and standard deviation of the S&amp;P 100 over this time period will fall in the same ranges listed above. This also means that more diversified portfolios can attribute larger portions of their volatility to systematic (market) risk. Less diversified portfolios have more unsystematic risk. Therefore, more diversified portfolios are more predictable based on the market and are therefore less risky because they stabilize returns and mitigate the risks associated with individual stocks.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Projects/project-1/submissions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Richard Herron<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
